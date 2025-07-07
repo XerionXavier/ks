@@ -5,17 +5,17 @@ $multiLineContent = @"
 function copyLogs {
 #Copy ECCS Logs to the C:\DIS folder
 Copy-Item -Path "C:\ProgramData\dis\im\logs" -Destination "C:\DIS" -Recurse
-Compress-Archive -Path "C:\DIS\logs" -DestinationPath "C:\DIS\ECCSlogs.zip" -Force
+Compress-Archive -Path "C:\DIS\logs" -DestinationPath "C:\DIS\ECCSlogs.zip" -Update
 Copy-Item "C:\DIS\ECCSlogs.zip" \\keystone\keystone\DI_Logs -Force
 Remove-Item "C:\DIS\logs" -Recurse
 #Copy IM Logs to the C:\DIS folder
 Copy-Item -Path "C:\Program Files (x86)\DIS\Interface Manager\IMLogs" -Destination "C:\DIS" -Recurse
-Compress-Archive -Path "C:\DIS\IMlogs" -DestinationPath "C:\DIS\IMlogs.zip"
+Compress-Archive -Path "C:\DIS\IMlogs" -DestinationPath "C:\DIS\IMlogs.zip" -Update
 Copy-Item "C:\DIS\IMlogs.zip" \\keystone\keystone\DI_Logs -Force
 Remove-Item "C:\DIS\IMlogs" -Recurse
 #Copy IM Archive Logs to the C:\DIS folder
 Copy-Item -Path "C:\Program Files (x86)\DIS\Interface Manager\Archive" -Destination "C:\DIS" -Recurse
-Compress-Archive -Path "C:\DIS\Archive" -DestinationPath "C:\DIS\IMArchivelogs.zip"
+Compress-Archive -Path "C:\DIS\Archive" -DestinationPath "C:\DIS\IMArchivelogs.zip" -Update
 Copy-Item "C:\DIS\IMArchivelogs.zip" \\keystone\keystone\DI_Logs -Force
 Remove-Item "C:\DIS\Archive" -Recurse
 }
