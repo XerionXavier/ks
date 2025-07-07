@@ -1,46 +1,46 @@
 ##############################################################################
 # All Code blocks go in this function v2.0
 ##############################################################################
-    
+$ErrorActionPreference = 'SilentlyContinue'
 function RunScripts {
     #Write-Host "`n####################"
 
     if($Script:Blocks[0]){
         #Put Script Block 1 code here
-        Write-Host "`n Installing Keystone"
+        Write-Host "`n Installing Keystone" -ForegroundColor Black -BackgroundColor White
         InstallKeystone
         Start-Sleep -Seconds 30
     }
 
     if($Script:Blocks[1]){
         #Put Script Block 2 code here
-        Write-Host "`n Installing ECC Service"
+        Write-Host "`n Installing ECC Service" -ForegroundColor Black -BackgroundColor White
         InstallECCS
         Start-Sleep -Seconds 30
     }
 
     if($Script:Blocks[2]){
         #Put Script Block 3 code here
-        Write-Host "`n Install Interface Manager"
+        Write-Host "`n Install Interface Manager" -ForegroundColor Black -BackgroundColor White
         InstallIM
         Start-Sleep -Seconds 15
     }
 
     if($Script:Blocks[3]){
         #Put Script Block 4 code here
-        Write-Host "`n IM Commerce Installer"
+        Write-Host "`n IM Commerce Installer" -ForegroundColor Black -BackgroundColor White
         IMCInstaller
     }
 
     if($Script:Blocks[4]){
         #Put Script Block 5 code here
-        Write-Host "`n UpdateKeystone.exe Installer"
+        Write-Host "`n UpdateKeystone.exe Installer" -ForegroundColor Black -BackgroundColor White
         UpdateKeystone
     }
 
     if($Script:Blocks[5]){
         #Put Script Block 6 code here
-        Write-Host "`n Sumatra PDF Installer"
+        Write-Host "`n Sumatra PDF Installer" -ForegroundColor Black -BackgroundColor White
         InstallSumatra
     }
 }
@@ -101,7 +101,7 @@ function GenerateForm {
           }
             function StartInstall { 
             Write-Host "Installing Keystone" -ForegroundColor Green
-            C:\DIS\comp1803p.exe /auto .\keystone
+            Start-Process powershell 'C:\DIS\comp1803p.exe /auto .\keystone'
           }
           function KeystoneDownload {
             Write-Host "Downloading Comp1803p to C:\DIS\..." -ForegroundColor Green
@@ -126,16 +126,28 @@ function GenerateForm {
             }
           }
           function SetAcl {
-            Write-Host "Backing up ACL and setting User Full contol on C:\Program Files (x86)\DIS\" -ForegroundColor Green
-            Set-location "C:\Program Files (x86)\DIS"
-            icacls ./ /save "C:\DIS\BUILTIN-Users-DIS-perms.txt" /t /c /q
-            icacls "C:\Program Files (x86)\DIS" /grant "BUILTIN\Users:(OI)(CI)F" /t /q
+            Write-Host "Setting User Full contol on C:\Program Files (x86)\DIS\" -ForegroundColor Green
+            $directoryPath = "C:\Program Files (x86)\DIS"
+            $acl = Get-Acl -Path $directoryPath
+            $user = "BUILTIN\Users"
+            $fileSystemRights = "FullControl"
+            $inheritanceFlags = "ContainerInherit, ObjectInherit"
+            $propagationFlags = "None"
+            $accessControlType = "Allow"
+            $fileSystemAccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($user, $fileSystemRights, $inheritanceFlags, $propagationFlags, $accessControlType)
+            $acl.AddAccessRule($fileSystemAccessRule)
+            Set-Acl -Path $directoryPath -AclObject $acl
+            #Set-location "C:\Program Files (x86)\DIS"
+            #Start-Process powershell 'icacls ./ /save "C:\DIS\BUILTIN-Users-DIS-perms.txt" /t /c /q'
+            #Start-Process powershell 'icacls "C:\Program Files (x86)\DIS" /grant "BUILTIN\Users:(OI)(CI)F" /t /q'
           }
           function StartInavigator {
-            Start-Sleep -Seconds 10
-            Start-Process cwbunnav.exe
+            Write-Host "Sleeping for 30 and starting i Navigator" -ForegroundColor Green
+            Start-Sleep -Seconds 30
+            Start-Process "C:\Program Files (x86)\IBM\Client Access\cwbunnav.exe"
           }
           function StartIfs {
+            Write-Host "Sleeping for 10 and mounting the IFS" -ForegroundColor Green
             Start-Sleep -Seconds 10
             Start-Process \\KEYSTONE
           }
@@ -150,7 +162,6 @@ function GenerateForm {
           break
           }
         }
-
         CheckDis
         Comp1803pExist
         PendingFileRename
@@ -161,10 +172,10 @@ function GenerateForm {
         #InstallSumatra
         KeymappingFolder
         SetAcl
+        SetPower
         #UpdateKeystone
         StartIfs
-        StartInavigator
-                
+        #StartInavigator
         }
         function UpdateKeystone {
             Write-Host 'Downloading UpdateKeystone.exe and creating shortcut...' -ForegroundColor Green
@@ -183,8 +194,9 @@ function GenerateForm {
           function InstallSumatra {
             $URI = "https://www.sumatrapdfreader.org/dl/rel/3.4.6/SumatraPDF-3.4.6-64-install.exe"
             $Path= "C:\DIS\SumatraPDF-install.exe"
+            $ProgressPreference = 'SilentlyContinue'
             Invoke-WebRequest -URI $URI -OutFile $Path 
-            C:\DIS\SumatraPDF-install.exe -s --all-users
+            Start-Process powershell 'C:\DIS\SumatraPDF-install.exe -s --all-users'
             Write-Host "SumatraPDF installed.." -ForegroundColor Green
           }
 
@@ -214,12 +226,12 @@ function GenerateForm {
         #
         #Download ECC Service to C:\DIS
         Write-Host "Downloading ECCService to C:\DIS\..." -ForegroundColor Green
-        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41921e.exe"
+        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41921i.exe"
         $Path= "C:\DIS\im41921e.exe"
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
-        
         C:\DIS\im41921e.exe
+        SetPower   
         #
         #Set IMCommand and IMCommerce as Admin
         Write-Host "Setting IMCommece and IMCommand as Admin in registry.." -ForegroundColor Green
@@ -245,8 +257,8 @@ function GenerateForm {
         $Path= "C:\DIS\im21910p.exe"
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
-        
-        Start-process C:\DIS\im21910p.exe
+        C:\DIS\im21910p.exe
+        SetPower
     }
 
     function IMCInstaller {
@@ -277,6 +289,7 @@ function GenerateForm {
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
         C:\DIS\im31627p.exe
+        SetPower
         #
         #Set IMCommand and IMCommerce as Admin
         Write-Host "Setting IMCommece and IMCommand as Admin in registry.." -ForegroundColor Green
@@ -285,6 +298,12 @@ function GenerateForm {
         New-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers' -Name 'C:\Program Files (x86)\DIS\IM\IMCommand.exe' -Value '~ RUNASADMIN' -PropertyType 'String' -Force
         New-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers' -Name 'C:\Program Files (x86)\DIS\IM\IMCommerce.exe' -Value '~ RUNASADMIN' -PropertyType 'String' -Force
     }
+    function SetPower {
+        Write-Host "Disabling sleep and hibernation" -ForegroundColor Green
+        powercfg /x -standby-timeout-ac 0
+        powercfg /x -standby-timeout-dc 0
+        powercfg /h off
+    }   
 
     ##############################################################################
     # Creates the form and all of its contents
@@ -336,7 +355,7 @@ function GenerateForm {
 
         foreach($obj in $CheckBoxes){
             if ($obj.Checked) {
-                $listBox1.Items.Add($obj.Text + ' install')
+                $listBox1.Items.Add($obj.Text + ' Selected for Installation')
                 $listBox1.Items.Add('')
                 $Script:Blocks[$obj.TabIndex] = $True
             } else {
@@ -459,4 +478,3 @@ function GenerateForm {
 
 Clear-Host
 GenerateForm
-#ExitScript
