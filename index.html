@@ -41,9 +41,10 @@
 </head>
 <body>
 <div class="sidebar">
-    <a href="#installing">Introduction</a>
+  <a href="#intro">Introduction</a><br>
+    <a href="#installing">Installing</a>
     <ul style="list-style: none;">
-        <li><a href="#installing_lan">Installing *LAN</a></li>
+        <li><a href="#installing_lan">*LAN devices</a></li>
         <li><a href="#installing_lpr">LPR devices</a></li>
         <li><a href="#installing_kps">KPS devices</a></li>
     </ul>
@@ -71,7 +72,7 @@
 </div>
 
 <div class="main-content">
-        <h1 id="installing">DIS Printing Manual</h1>
+        <h1 id="intro">DIS Printing Manual</h1>
             <p>
               There are generally 3 different methods for connecting printers to the DIS business system.<br>
               *LAN - This method uses the HP Jet Direct protocol also known as Raw printing and is sent to TCP port 9100 of the printer. It has communication capabilities that will inform the business system of errors, out of paper conditions, jams etc..<br>
@@ -96,7 +97,7 @@
               <img src="images/green-screen-wrkdevd-1.png" alt="Green Screen WRKDEVD *PRT view"><br>
             </p>
 
-        <h3>Installing a printer device</h3>
+        <h3 id="installing">Installing a printer device</h3>
           <p>
             There are generally three methods for installing a printer.<br>
             *LAN - Networked device using HP Jet Direct protocol port 9100. Provides bi-directional communication to the business system for device errors<br>
@@ -352,7 +353,7 @@
             <h3 id="kps-trouble">KPS/Keystone Troubleshooting</h3>
             KPS printing has several moving parts that all have to be configured and operating properly to work. If there is a print stoppage try verifying the following.<br>
             1) Type the command WRKOUTQ at a command line and verify that the device has the writer running in the Writer column. If it does not, that would indicate that the Keystone session supporting the connection on the host PC is not running.<br> 
-            2) The Universal Print Driver is no longer selected in the printers<a href="#advanced"> advanced</a> tab. Select the printer and go to properties to verify that the driver is selected in the list.<br>
+            2) The Universal Print Driver is no longer selected in the printers<a href="#advanced"> advanced</a> tab. Open Windows Printer & Scanners and select the printer and go to properties to verify that the driver is selected in the list.<br>
             3) The TN5250 emaulator is disconnected. Right click on the printer icon in the system tray and restore to the Desktop. Verify the button at the bottom says disconnect, if not click on connect and the screen will switch to gray indicating that it is enabled.<br>
           </p>
           <p>
