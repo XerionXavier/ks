@@ -78,25 +78,24 @@
               *LAN - This method uses the HP Jet Direct protocol also known as Raw printing and is sent to TCP port 9100 of the printer. It has communication capabilities that will inform the business system of errors, out of paper conditions, jams etc..<br>
               LPR - <b>L</b>ine <b>P</b>rinter <b>R</b>emote, uses the LPD service (port 515) to communicate to the device. This method does not provide any communication to the system about it's status. This method is used where devices do not support the *LAN configuration. Please note that LPD is a legacy technology and not a formal standard. Vendors have implemented slight variations in how devices use the LPD service. This can cause compatability issues from device to device.<br>
               KPS - The Keystone client is configured to connect a supported USB host connected printer to the business system. This is generally only supported with Lexmark and HP devices.<br><br>
-              
+            </p>
+            <p>
+              IBM publishes a <a href ="https://www.ibm.com/support/pages/information-printers-various-manufacturers" target="_blank">document</a>  on supported printers and suggested methods for communication. The list of printers is several years behind what is currently in production, but it can be used as a guide to successfully set up a printing device.
             </p>
             <p>
               For consistency use a Terminal session such as a "Green Screen" or a Quantum session as the interface is almost identical.<br>
               This is the WRKDEVD *PRT view of the printing devices installed on the system.<br>
               You can open this view by the key combo ALT+A entering the command WRKDEVD *PRT and clicking OK, or opening from the Quantum home screen System -> System Operator Only -> Start/End Printers<br>
-              
             </p>
             <p>
               <img src="images/green-screen-wrkdevd.png" alt="Green Screen WRKDEVD *PRT view">
             </p>
             <p>
-              When using Quantum to access the IBM terminal session, type the command WRKDEVD *PRT on the ==> command line to Work with Device Descriptions.<br>
-              
+              When using Quantum to access the IBM terminal session, type the command WRKDEVD *PRT on the ==> command line to Work with Device Descriptions.<br> 
             </p>
             <p>
               <img src="images/green-screen-wrkdevd-1.png" alt="Green Screen WRKDEVD *PRT view"><br>
             </p>
-
         <h3 id="installing">Installing a printer device</h3>
           <p>
             There are generally three methods for installing a printer.<br>
@@ -159,7 +158,7 @@
           <img src="images/hp-upd-1.png" alt="Printers & Scanners M501"><br><br>
           Click on printer properties.<br><br>
           <img src="images/hp-upd-2.png" alt="Printers & Scanners properties"><br><br>
-          Select the "Advanced" tab. Then under Driver: select the HP Universal Printing PCL 6 option from thr dropdown menu and click OK.<br><br>
+          Select the "Advanced" tab. Then under Driver: select the HP Universal Printing PCL 6 option from th dropdown menu and click OK.<br><br>
           <img id="advanced" src="images/hp-upd-3.png" alt="Printers & Scanners properties"><br><br>
           Select the "General" tab and Print Test Page to verify that the device prints. If all is well proceed to Keytone configuration. If it does not print you can try to install the device a second time.<br><br>
           <img src="images/hp-upd-4.png" alt="Printers & Scanners test page"><br><br>
