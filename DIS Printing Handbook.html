@@ -41,7 +41,7 @@
 </head>
 <body>
 <div class="sidebar">
-    <a href="#installing">General</a>
+    <a href="#installing">Introduction</a>
     <ul style="list-style: none;">
         <li><a href="#installing_lan">Installing *LAN</a></li>
         <li><a href="#installing_lpr">LPR devices</a></li>
@@ -55,20 +55,23 @@
     </ul>
     <a href="#modify_settings">Modify Settings</a>
     <ul style="list-style: none;">
-        <li><a href="#modify_ip">Modify IP</a></li>
         <li><a href="#modify_ENVP">Add device to Report printers</a></li>
         <li><a href="#modify_POS">Add device to POS printers</a></li>
-                <li><a href="#chgs36">Change System36 Name</a></li>
+        <li><a href="#chgs36">Change System36 Name</a></li>
+        <li><a href="#modify_ip">Modify IP</a></li>
         <li><a href="#modify_description">Modify the Description</a></li>
     </ul>
     <a href="#troubleshoot">Troubleshooting</a>
     <ul style="list-style: none;">
+        <li><a href="#lan-trouble">*LAN Troubleshooting</a></li>
+        <li><a href="#lpr-trouble">LPR Troubleshooting</a></li>
+        <li><a href="#kps-trouble">KPS Troubleshooting</a></li>
         <li><a href="#message-wait">Printer messages MSGW</a></li>
     </ul>
 </div>
 
 <div class="main-content">
-        <h1 id="installing">DIS Printer User Manual</h1>
+        <h1 id="installing">DIS Printing Manual</h1>
             <p>
               There are generally 3 different methods for connecting printers to the DIS business system.<br>
               *LAN - This method uses the HP Jet Direct protocol also known as Raw printing and is sent to TCP port 9100 of the printer. It has communication capabilities that will inform the business system of errors, out of paper conditions, jams etc..<br>
@@ -224,21 +227,6 @@
         <h3 id="removing_kps">Removing a KPS printer device</h3>
             A Keystone printer must have the configuration removed from the host that it is connected to before it can be removed from the business system. Use the steps in <a href="#keystone_config">creating</a> a KPS printer and reverse the process by removing the name of the device and that it is default from the config files.<br>
           </p>
-
-          <h3 id="modify_ip">Modify IP address</h3>
-          <p>
-            The device writer must be stopped before you can change the IP address or make changes to the desciption in Work with Device Descriptions (WRKDEVD *PRT)<br>
-            From a terminal prompt the command for stopping a writer is the same for *LAN and LPR devices. Type ENDWTR (DIS ID) to stop the writer. For example ENDWTR E3<br><br>
-            <img src="images/green-screen-endwtr-lan.png" alt="Green Screen endwtr lan"><br><br>
-            You can see that E3 has been removed from the Writer column and has successfully stopped. You can now proceed to the Work with Device Descriptions to make changes. (WRKDEVD *PRT)<br><br>
-            <img src="images/green-screen-endwtr-lan-1.png" alt="Green Screen endwtr lan ended"><br><br>
-            To modify the IP address of a *LAN device you must first vary it off. Place the cursor on the Opt line and use 8 next to the device you want to edit.<br><br>
-            <img src="images/green-screen-vary-off-lan.png" alt="Green Screen endwtr lan ended"><br><br>
-            Use Opt 2 to VARY OFF the device.<br>
-            Use Opt 1 to VARY ON<br>
-            With the device varied off you can proceed to <a href="#modify_description">Modify Description</a>.<br><br>
-            <img src="images/green-screen-vary-off-lan-status.png" alt="Green Screen endwtr lan ended"><br><br>
-          </p>
           
           <h3 id="modify_ENVP">Add device to Report printing</h3>
           <p>
@@ -282,8 +270,38 @@
           <img src="images/pos-config-5.png" alt="Green Screen POS config"><br><br>
           </p>
 
-          <h3 id="modify_description">Modify the Printer Description.</h3>
+          <h3 id="modify_ip">Modify IP address</h3>
           <p>
+            The device writer must be stopped before you can change the IP address or make changes to the desciption in Work with Device Descriptions (WRKDEVD *PRT)<br>
+            From a terminal prompt the command for stopping a writer is the same for *LAN and LPR devices. Type ENDWTR (DIS ID) to stop the writer. For example ENDWTR E3<br><br>
+            <b>Modify IP for a *LAN printer.</b><br>
+            <img src="images/green-screen-endwtr-lan.png" alt="Green Screen endwtr lan"><br><br>
+            You can see that E3 has been removed from the Writer column and has successfully stopped. You can now proceed to the Work with Device Descriptions to make changes. (WRKDEVD *PRT)<br><br>
+            <img src="images/green-screen-endwtr-lan-1.png" alt="Green Screen endwtr lan ended"><br><br>
+            To modify the IP address of a *LAN device you must first vary it off. Place the cursor on the Opt line and use 8 next to the device you want to edit.<br><br>
+            <img src="images/green-screen-vary-off-lan.png" alt="Green Screen endwtr lan ended"><br><br>
+            Use Opt 2 to VARY OFF the device.<br>
+            Use Opt 1 to VARY ON<br>
+            With the device varied off you can proceed to <a href="#modify_description">Modify Description</a>.<br><br>
+            <img src="images/green-screen-vary-off-lan-status.png" alt="Green Screen endwtr lan ended"><br><br>
+            </p>
+            <p>
+            <b>Modify IP for LPR printer</b><br>
+            From a command line type WRKOUTQ and hit the Enter key. Click on the command line again and type ENDWTR (DIS ID) to stop the LPR writer.<br>
+            Place a 2 next to the LPR printer device you wish to change and hit the Enter key.<br><br>
+            <img src="images/lpr-change-ip-1.png" alt="LPR change IP"><br><br>
+            Use the Enter key once followed by page down to expand the screen.<br><br>
+            <img src="images/lpr-change-ip-1a.png" alt="LPR change IP"><br><br>
+            Continue to use series of page down and Enter to get to the following screen.<br>
+            When advancing through the menu and if the wrong key is used, Page Down or Enter and the screen is exited, you will have to stop the writer again and repeat the steps in the proper order to advance to the IP address field.<br><br>
+            The sequence is Enter, Pg Down, Enter, Enter. Then arrow down to the IP address field and change. When finished hit Enter twice to exit. It takes a litle practice to get to the screen to change the IP.<br><br>
+            <img src="images/lpr-change-ip-2.png" alt="LPR change IP"><br><br>
+            
+          </p>          
+
+          <h3 id="modify_description">Modify the Printer Description and or the IP address.</h3>
+          <p>
+          Steps for *LAN printer.<br>
           With the writer stopped and the *LAN device VARIED OFF, Open Work with Device Descriptions with the command WRKDEVD *PRT.<br>
           Place a 2 in the Opt column next to the device to change.<br><br>
           <img src="images/green-screen-change-1.png" alt="Green Screen endwtr lan ended"><br><br>
@@ -302,10 +320,17 @@
           *LAN use the STRPRTWTR (DIS ID) command. For example STR<b>PRT</b>WTR E1<br>
           LPR, STRRMTWTR (DIS ID) would look like STR<b>RMT</b>WTR E3 since it is a LPR device.<br><br>
           <img src="images/green-screen-change-5.png" alt="Green Screen change refresh"><br><br>
+          Steps for LPR printer.<br>
+          LPR devices do not require the Writer is stopped nor is there anything to VARY OFF before changing the description. However, you will have to stop the writer before you can change the IP address.<br>
+          Type ENDWTR (DIS ID) on a command line to stop a running writer. Place a 2 next to the LPR description you wish to change.<br><br>
+          <img src="images/lpr-change-description-2.png" alt="Change LPR description"><br><br>
+          Page down all the way to the bottom,click on the description line and edit. Be sure to have a single quote at the beginning and the end of the description. You can also remove <b>BOTH</b> quotes and they will be added automatically when the document is saved. Hit the ENTER key to save changes.<br><br>
+          <img src="images/lpr-change-description-1.png" alt="Change LPR description"><br><br>
+
           </p>
         <h3 id="troubleshoot">Troubleshooting</h3>
           <p>
-            <h3>Installation of a *LAN printer</h3>
+            <h3 id="lan-trouble">*LAN Troubleshooting</h3>
 
             <h3>Removal of a *LAN printer</h3>
 
@@ -314,7 +339,7 @@
             
           </p>
           <p>
-            <h3>Installation of LPR printer</h3>
+            <h3 id="lpr-trouble">LPR Troubleshooting</h3>
             When installing LPR devices an error can occur like the one below. This one is is caused by the DIS ID used already existing as a device. Enter a C on the command line to Cancel the operation.<br><br>
             <img src="images/create-lpr-error-1.png" alt="Remove LPR device"><br><br>
             
@@ -323,11 +348,11 @@
 
           </p>
           <p>
-            <h3>Installation of KPS or Keystone printer</h3>
+            <h3 id="kps-trouble">KPS/Keystone Troubleshooting</h3>
             KPS printing has several moving parts that all have to be configured and operating properly to work. If there is a print stoppage try verifying the following.<br>
             1) Type the command WRKOUTQ at a command line and verify that the device has the writer running in the Writer column. If it does not, that would indicate that the Keystone session supporting the connection on the host PC is not running.<br> 
             2) The Universal Print Driver is no longer selected in the printers<a href="#advanced"> advanced</a> tab. Select the printer and go to properties to verify that the driver is selected in the list.<br>
-            3) 
+            3) The TN5250 emaulator is disconnected. Right click on the printer icon in the system tray and restore to the Desktop. Verify the button at the bottom says disconnect, if not click on connect and the screen will switch to gray indicating that it is enabled.<br>
           </p>
           <p>
             <h3 id="message-wait">Printer Messages (MSGW)</h3>
