@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Scrolling Left Sidebar */
+    .sidebar {
+        height: 100%;
+        width: 200px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #333;
+        padding-top: 10px;
+        overflow-y: auto;
+    }
+
+    /* Styling the links */
+    .sidebar a {
+        padding: 5px 15px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+    }
+
+    .sidebar a:hover {
+        background-color: #555;
+    }
+
+    /* Content area with margin to account for sidebar */
+    .main-content {
+        margin-left: 200px;
+        padding: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="sidebar">
+    <a href="#installing">Introduction</a>
+    <ul style="list-style: none;">
+        <li><a href="#installing_lan">Installing *LAN</a></li>
+        <li><a href="#installing_lpr">LPR devices</a></li>
+        <li><a href="#installing_kps">KPS devices</a></li>
+    </ul>
+    <a href="#removing">Removing</a>
+    <ul style="list-style: none;">
+        <li><a href="#removing_star_lan">*LAN devices</a></li>
+        <li><a href="#removing_lpr">LPR devices</a></li>
+        <li><a href="#removing_kps">KPS devices</a></li>
+    </ul>
+    <a href="#modify_settings">Modify Settings</a>
+    <ul style="list-style: none;">
+        <li><a href="#modify_ENVP">Add device to Report printers</a></li>
+        <li><a href="#modify_POS">Add device to POS printers</a></li>
+        <li><a href="#chgs36">Change System36 Name</a></li>
+        <li><a href="#modify_ip">Modify IP</a></li>
+        <li><a href="#modify_description">Modify the Description</a></li>
+    </ul>
+    <a href="#troubleshoot">Troubleshooting</a>
+    <ul style="list-style: none;">
+        <li><a href="#lan-trouble">*LAN Troubleshooting</a></li>
+        <li><a href="#lpr-trouble">LPR Troubleshooting</a></li>
+        <li><a href="#kps-trouble">KPS Troubleshooting</a></li>
+        <li><a href="#message-wait">Printer messages MSGW</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+        <h1 id="installing">DIS Printing Manual</h1>
+            <p>
+              There are generally 3 different methods for connecting printers to the DIS business system.<br>
+              *LAN - This method uses the HP Jet Direct protocol also known as Raw printing and is sent to TCP port 9100 of the printer. It has communication capabilities that will inform the business system of errors, out of paper conditions, jams etc..<br>
+              LPR - <b>L</b>ine <b>P</b>rinter <b>R</b>emote, uses the LPD service (port 515) to communicate to the device. This method does not provide any communication to the system about it's status. This method is used where devices do not support the *LAN configuration. Please note that LPD is a legacy technology and not a formal standard. Vendors have implemented slight variations in how devices use the LPD service. This can cause compatability issues from device to device.<br>
+              KPS - The Keystone client is configured to connect a supported USB host connected printer to the business system. This is generally only supported with Lexmark and HP devices.<br><br>
+              
+            </p>
+            <p>
+              For consistency use a Terminal session such as a "Green Screen" or a Quantum session as the interface is almost identical.<br>
+              This is the WRKDEVD *PRT view of the printing devices installed on the system.<br>
+              You can open this view by the key combo ALT+A entering the command WRKDEVD *PRT and clicking OK, or opening from the Quantum home screen System -> System Operator Only -> Start/End Printers<br>
+              
+            </p>
+            <p>
+              <img src="images/green-screen-wrkdevd.png" alt="Green Screen WRKDEVD *PRT view">
+            </p>
+            <p>
+              When using Quantum to access the IBM terminal session, type the command WRKDEVD *PRT on the ==> command line to Work with Device Descriptions.<br>
+              
+            </p>
+            <p>
+              <img src="images/green-screen-wrkdevd-1.png" alt="Green Screen WRKDEVD *PRT view"><br>
+            </p>
+
+        <h3>Installing a printer device</h3>
+          <p>
+            There are generally three methods for installing a printer.<br>
+            *LAN - Networked device using HP Jet Direct protocol port 9100. Provides bi-directional communication to the business system for device errors<br>
+            LPR - Networked device using LPD (LPR) protcol port 515<br>
+            KPS - USB connected printer using a Keystone session to connect to business system<br>  
+          </p>
+          <p>
+            <h3 id="installing_lan">*LAN Installation</h3>
+            The best practice is to copy an existing printer that matches as closely as possible the new printer make and model. **If there are no *LAN devices to copy please contact DIS support.**<br>
+            Select a printer from the list using page up and down and place a 3 in the options field to copy it.<br><br>            
+            <img src="images/copy_star_LAN.png" alt="Green Screen copy *LAN device"><br><br>
+            In the Device description field enter the new DIS ID and hit enter. The screen will change and show additional settings. Use page down twice to see the next screen to modify the IP address.<br><br>
+            <img src="images/copy_star_LAN_1.png" alt="Green Screen copy *LAN device 1"><br><br>
+            Enter the new IP address and pay close attention to the single quotes. Page down again<br><br>
+            <img src="images/copy_star_LAN_2.png" alt="Green Screen copy *LAN device 2"><br><br>
+            Enter the printer description including make and model and pay close attention to the single quotes. Hit the enter key when finished.<br>
+            <img src="images/copy_star_LAN_3.png" alt="Green Screen copy *LAN device 3"><br><br>
+            The message that the device was created successfully.<br><br>
+            <img src="images/copy_star_LAN_4.png" alt="Green Screen copy *LAN device 4"><br><br>
+            Use F5 or Fn+F5 to refresh the list of printer devices and E2 is added to the list.<br><br>
+            <img src="images/copy_star_LAN_5.png" alt="Green Screen copy *LAN device 5"><br><br>
+            Place 8 in the options field next to E2 to get to the screen and VARY ON the device.<br><br>
+            <img src="images/copy_star_LAN_6.png" alt="Green Screen copy *LAN device 6"><br><br>
+            Depending on your user, you may have to increase the "Assistance Level" by using Shift+F9(F21) or Fn+Shift+F9(F21)<br><br>
+            <img src="images/copy_star_LAN_6a.png" alt="Green Screen copy *LAN device 6"><br><br>
+            Place 1 in the options field to VARY ON the device.<br><br> 
+            <img src="images/copy_star_LAN_7.png" alt="Green Screen copy *LAN device 6"><br><br>
+            Type STRPRTWTR <DIS ID> at the command line to start the writer. For example, STRPRTWTR E2<br><br>
+            <img src="images/copy_star_LAN_8.png" alt="Green Screen copy *LAN device 6"><br><br>
+            Type WRKOUTQ to verify the WRITER started<br><br>
+            <img src="images/copy_star_LAN_9.png" alt="Green Screen copy *LAN device 6"><br><br>
+            The Output Queues screen shows that E2 is running in the writer column<br><br>
+            <img src="images/copy_star_LAN_10.png" alt="Green Screen copy *LAN device 6"><br><br>
+            You should now be able to select the printer in POS Invoicing and print a work order of invoice. There will be a MSGW generated for the very first document sent to the queue. See Troubleshooting for instructions on clearing a message.<br>  
+            
+          </p>
+          <p>
+            <h3 id="installing_lpr">LPR Installation</h3>
+            Start by opening a "Green Screen" or use ALT+A at a Quantum Home screen and type the command WRKDEVD *PRT.<br>
+            This type of device is not copied but a configuration is created with the command, DISCRTLPR at a command line and hit enter.<br>
+            <img src="images/create_LPR-1.png" alt="Green Screen create LPR device 1"><br><br>
+            Fill in the reuired fields with the new Outque name as well as the IP address and a short description that includes "LPR" and the IP address that the business system uses to connct to the printer.<br>
+            Remote Printer Queue (PR1) and Mfg Type and Model(*HP4) are always the values shown in the image.<br><br>
+            <img src="images/create_LPR-2.png" alt="Green Screen create LPR device 2"><br><br>
+            The new printer is now visible in the list as E3.<br><br>
+            <img src="images/create_LPR-3.png" alt="Green Screen create LPR device 2"><br><br>
+            Type WRKOUTQ at the command line to verify that the writer is on. You will see it in the Writer column when running. If it is not running you can start it manually with STRRMTWTR (DIS ID)<br><br>
+            <img src="images/create_LPR-4.png" alt="Green Screen create LPR device 2"><br><br>
+          </p>
+          <p>
+            <h3 id="installing_kps">Installing KPS printer</h3>
+            Keystone files are modified to enable/disable a USB connected printer. This also requires the Universal print driver is installed for the manufacturer for example Lexmark or HP.<br>
+            Lexmark UPD <a href="https://downloads.lexmark.com/downloads/drivers//Lexmark_Universal_v2_UD1_PCL5_Emul_03072025.exe" target="_blank">download</a> link. The correct version is the PCL5 not the PCL XL driver.<br>
+            HP UPD driver page. Be sure to select the driver for Windows 64 bit PCL6 <a href="https://support.hp.com/us-en/drivers/hp-universal-print-driver-series-for-windows/503548" target="_blank">download</a> link.<br>
+          <img src="images/hp_upd_download.png" alt="HP UPD Download link"><br><br>
+          Run the software installer and when completed open Printers and Scanners in Windows.<br><br>
+          <img src="images/printers-scanners.png" alt="Printers & Scanners"><br><br>
+          Allow Windows to install the printer and use it's own built-in driver. We will change the driver to the Universal version. Click on the printer that you want to use as Keystone printer.<br><br>
+          <img src="images/hp-upd-1.png" alt="Printers & Scanners M501"><br><br>
+          Click on printer properties.<br><br>
+          <img src="images/hp-upd-2.png" alt="Printers & Scanners properties"><br><br>
+          Select the "Advanced" tab. Then under Driver: select the HP Universal Printing PCL 6 option from thr dropdown menu and click OK.<br><br>
+          <img id="advanced" src="images/hp-upd-3.png" alt="Printers & Scanners properties"><br><br>
+          Select the "General" tab and Print Test Page to verify that the device prints. If all is well proceed to Keytone configuration. If it does not print you can try to install the device a second time.<br><br>
+          <img src="images/hp-upd-4.png" alt="Printers & Scanners test page"><br><br>
+          <h3 id="keystone_config">Keystone Configuration</h3>
+          Open a Windows File Explorer and navigate to the C:\Program Files (x86)\DIS\Keystone directory and sort by file type. Open the legap.ini file by double clicking on it.<br><br>
+          <img src="images/legap-ini.png" alt="Explorer"><br><br>
+          Scroll down to the bottom of the file to the "PrinterDevice="" section. Append the name of the DIS ID to that line, then save and close. For example PrinterDevice=E5. If the configuration is to be removed, restore the line to PrinterDevice=<br><br>
+          <img src="images/legap-ini-1.png" alt="Edit legap.ini"><br><br>
+          Open the second file legasuite.ini and scroll to the bottom. Type DEFAULT on the line next to "Default Printer=". Save and close the file. For example, DefaultPrinter=DEFAULT. In the event that the configuration os to be removed, change the line back to DefaultPrinter=<br><br>
+          <img src="images/legap-ini-2.png" alt="edit legasuite.ini"><br><br>
+          Open Keystone from the Desktop shortcut or from the start menu. You should see a small notification window open for a few seconds as below. This is an dication that the host is configured for KPS printing.<br><br>
+          <img src="images/tn5250-splash.png" alt="Printers & Scanners properties"><br><br>
+          Expand the system tray by clicking the up arrow in the Taskbar on the far right next to the clock.<br><br>
+          <img src="images/tn5250-1.png" alt="Printers & Scanners properties"><br><br>
+          Right click on the small printer icon then left click on TN5250.<br><br>
+          <img src="images/tn5250-2.png" alt="Printers & Scanners properties"><br><br>
+          The printer configuration window will open. Click on the DISCONNECT button to permit modification.<br><br>
+          <img src="images/tn5250-3.png" alt="Printers & Scanners properties"><br><br>
+          In the Printer Device field, enter the DIS ID of the printer in this case it is E6.<br><br>
+          <img src="images/tn5250-4.png" alt="Printers & Scanners properties"><br><br>
+          Click the dropdown menu and select the printer with the Univeral Print Driver installed and click OK.<br><br>
+          <img src="images/tn5250-5.png" alt="Printers & Scanners properties"><br><br>
+          Verify that the device name and the printer selected from the list is correct and click Connect. The window will minimize back to the system tray and the printer should now be ACTIVE and VARIED ON.<br><br>
+          <img src="images/tn5250-6.png" alt="Printers & Scanners properties"><br><br>
+          
+        </p>
+
+        <h3 id="removing_star_lan">Removing a *LAN printer device</h3>
+          <p>
+            Writers must be stopped and *LAN devices will also need the device VARIED OFF before it can be completely removed. The output queue will also have to be empty for any device, *LAN, LPR and KPS before removal. Type WRKOUTQ at a command line and page down to the printer you want to remove.<br><br>
+            Type ENDWTR on the command line to start a dialog where you can enter the DIS ID of the writer you want to stop. This screen is helpful if you have more than one writer you wish to stop.<br><br>
+            <img src="images/remove-lan-a.png" alt="delete outq"><br><br>
+            Enter the DIS ID of the writer and hit the ENTER key.<br><br>
+            <img src="images/remove-lan-b.png" alt="delete outq"><br><br>
+            The command to stop the writer can also be run all at once. For example ENDWTR E3.<br><br> 
+            <img src="images/remove-lan-c.png" alt="delete outq"><br><br>
+            Now that the writer has been stopped. Place a 5 next to the device that you want to manage the spools and remove.<br><br>
+            <img src="images/remove-lan-1.png" alt="delete outq"><br><br>
+            Place a 4 on the line next to all of the documents in the queue and hit the Enter key.<br><br>
+            <img src="images/remove-lan-2.png" alt="delete outq"><br><br>
+            Hit the Enter key a second time to confirm deletion.<br><br>
+            <img src="images/remove-lan-3.png" alt="delete outq"><br><br>
+            There should be no spools in the queue. If there are, repeat the steps to remove them.<br><br>
+            <img src="images/remove-lan-4.png" alt="delete outq"><br><br>
+            Return to the Work with Device Descriptions screen again and page down to the desired device and place a 4 in the Opt column next to it and hit the Enter key.<br><br>
+            <img src="images/remove-lan-5.png" alt="delete outq"><br><br>
+            Hit the Enter key a second time to confirm deletion making sure it is the correct device ID.<br><br>
+            <img src="images/remove-lan-6.png" alt="delete outq"><br><br>
+            Use F5 to refresh if necessary and now the E4 printer is no longer in the list.<br><br>
+            <img src="images/remove-lan-7.png" alt="delete outq"><br><br>
+            
+          </p>
+          <h3 id="removing_lpr">Removing a LPR printer device</h3>
+          <p>
+            Writers must be stopped before it can be completely removed.<br>
+            Type the command ENDWTR (DIS ID), for example ENDWTR E3. Type the command WRKOUTQ. Verify that the writer is stopped and that the outq is empty.<br><br>
+            <img src="images/remove-lpr-1.png" alt="Remove LPR dev"><br><br>
+            Return to the Work with Device Descriptions screen and page down to the device you want to remove. Place a 4 in the Opt column next to the device you wan to remove.<br><br>
+            <img src="images/remove-lpr-2.png" alt="Remove LPR dev"><br><br>
+            Hit the Enter key to confirm the removal of the device.<br><br>
+            <img src="images/remove-lpr-3.png" alt="Remove LPR dev"><br><br>
+            Device E3 has been removed from the list and a message at the bottom of the screen confirming that.<br><br>
+            <img src="images/remove-lpr-4.png" alt="Remove LPR dev"><br><br>
+          </p>
+          <p>
+        <h3 id="removing_kps">Removing a KPS printer device</h3>
+            A Keystone printer must have the configuration removed from the host that it is connected to before it can be removed from the business system. Use the steps in <a href="#keystone_config">creating</a> a KPS printer and reverse the process by removing the name of the device and that it is default from the config files.<br>
+          </p>
+          
+          <h3 id="modify_ENVP">Add device to Report printing</h3>
+          <p>
+          Open a "Green Screen" terminal or Alt+A in Quantum and type ENVP and hit enter. (You may encounter a Security Gate before you can enter ENVP. You will have to contact an admin within your organization or DIS Support to obtain the password.) This procedure should be done first to establish if there will be a i5/OS to S/36 mismatch. If there is, proceed to <a href="#chgs36">Change S36 Name</a> after this step is completed.<br> You will need to change to configuration mode by using the key combo Shift+F12, or Fn+Shift+F12 to input F24 if using a Laptop.<br><br>
+          <img src="images/envp-1.png" alt="ENVP Configuration"><br><br>
+          Use the F6 key or Fn+F6 if using a Laptop device.<br><br>
+          <img src="images/envp-2.png" alt="ENVP Configuration"><br><br>
+          Enter the DIS ID of the printer you wish to add to DIS Report printing and hit the Enter key.<br><br>
+          <img src="images/envp-3.png" alt="ENVP Configuration"><br><br>
+          System message printed confirming the creation of E3 in the DIS table. Use F12 or Fn+F12 to return to the Work with DIS Report Printers screen.<br><br>
+          <img src="images/envp-4.png" alt="ENVP Configuration"><br><br>
+          The entry is now in the list as E3. Take note of the ID in parenthesis (E3). This is the S/36 or System 36 ID, this is used to designate the <b>Default printer</b> in the field at the top of Point of Sale invocing as well as the ID used to designate the printer selected in EOD reporting for example.<br><br>
+          <img src="images/envp-5.png" alt="ENVP Configuration"><br><br>
+          <h3 id="chgs36">Change System36 name CHGS36</h3>
+          If the two ID's <b>DO NOT</b> match up, or a device name exceeds 2 characters, an additional process can be used to sync them. F12 or Fn+F12 to exit Work with Device Dscriptions and at the command line type CHGS36 and hit the Enter key.<br><br>
+          <img src="images/chgs36-1.png" alt="CHGS36 Configuration"><br><br>
+          Place a 2 in the Option column next to S/36 printer IDs and hit the Enter Key.<br><br>
+          <img src="images/chgs36-2.png" alt="CHGS36 Configuration"><br><br>
+          Page down to the ID you are looking for , or all the way to the bottom if it was just created. If the ID's need to be adjusted make the change in the S/36 column and hit the Enter key to save.<br><br>
+          <img src="images/chgs36-3.png" alt="CHGS36 Configuration"><br><br>
+          Use F3 to exit the configuration and go to the next screen.<br><br>
+          <img src="images/chgs36-4.png" alt="CHGS36 Configuration"><br><br>
+          Enter a 1 in the selection field and hit the Enter key to save.<br><br>
+          <img src="images/chgs36-5.png" alt="CHGS36 Configuration"><br><br>
+          You should see an "Update in Progress" message at the botton of the terminal screen for a moment and then returned to the menu screen.<br><br>
+          <img src="images/chgs36-6.png" alt="CHGS36 Configuration"><br><br>
+          </p>
+          <h3 id="modify_POS">Add device to POS printing</h3>
+          A printer used for Sales and Work orders as well as reports will need to be added to ENVP and POS printing. When the printer has been added in WRKDEVD *PRT, proceed to configuring POS and Reports.<br><br>  
+          <p>
+          The device must first be added to <a href="#modify_ENVP" >Report Printing</a> or ENVP.
+          F12 or Fn+F12 to get to a screen with a command line. Type menu x52.<br><br>
+          <img src="images/pos-config-1.png" alt="Green Screen POS config"><br><br>
+          Place a 10 on the command line for "Point of Sale Printers"<br><br>
+          <img src="images/pos-config-2.png" alt="Green Screen POS config"><br><br>
+          Type the two character S/36 name in the <b>Printer:</b> field and hit the Enter key.<br><br>
+          <img src="images/pos-config-3.png" alt="Green Screen POS config"><br><br>
+          Press Enter a second time to save the configuration and continue. The remaining default values should remain unchanged. This screen can also be used to remove a device from the POS table if desired using Shift+F7 or Fn+Shift+F7.<br><br>
+          <img src="images/pos-config-4.png" alt="Green Screen POS config"><br><br>
+          Finally, use F1 or Fn+F1 to exit the configuration mode.<br><br>
+          <img src="images/pos-config-5.png" alt="Green Screen POS config"><br><br>
+          </p>
+
+          <h3 id="modify_ip">Modify IP address</h3>
+          <p>
+            The device writer must be stopped before you can change the IP address or make changes to the desciption in Work with Device Descriptions (WRKDEVD *PRT)<br>
+            From a terminal prompt the command for stopping a writer is the same for *LAN and LPR devices. Type ENDWTR (DIS ID) to stop the writer. For example ENDWTR E3<br><br>
+            <b>Modify IP for a *LAN printer.</b><br>
+            <img src="images/green-screen-endwtr-lan.png" alt="Green Screen endwtr lan"><br><br>
+            You can see that E3 has been removed from the Writer column and has successfully stopped. You can now proceed to the Work with Device Descriptions to make changes. (WRKDEVD *PRT)<br><br>
+            <img src="images/green-screen-endwtr-lan-1.png" alt="Green Screen endwtr lan ended"><br><br>
+            To modify the IP address of a *LAN device you must first vary it off. Place the cursor on the Opt line and use 8 next to the device you want to edit.<br><br>
+            <img src="images/green-screen-vary-off-lan.png" alt="Green Screen endwtr lan ended"><br><br>
+            Use Opt 2 to VARY OFF the device.<br>
+            Use Opt 1 to VARY ON<br>
+            With the device varied off you can proceed to <a href="#modify_description">Modify Description</a>.<br><br>
+            <img src="images/green-screen-vary-off-lan-status.png" alt="Green Screen endwtr lan ended"><br><br>
+            </p>
+            <p>
+            <b>Modify IP for LPR printer</b><br>
+            From a command line type WRKOUTQ and hit the Enter key. Click on the command line again and type ENDWTR (DIS ID) to stop the LPR writer.<br>
+            Place a 2 next to the LPR printer device you wish to change and hit the Enter key.<br><br>
+            <img src="images/lpr-change-ip-1.png" alt="LPR change IP"><br><br>
+            Use the Enter key once followed by page down to expand the screen.<br><br>
+            <img src="images/lpr-change-ip-1a.png" alt="LPR change IP"><br><br>
+            Continue to use series of page down and Enter to get to the following screen.<br>
+            When advancing through the menu and if the wrong key is used, Page Down or Enter and the screen is exited, you will have to stop the writer again and repeat the steps in the proper order to advance to the IP address field.<br><br>
+            The sequence is Enter, Pg Down, Enter, Enter. Then arrow down to the IP address field and change. When finished hit Enter twice to exit. It takes a litle practice to get to the screen to change the IP.<br><br>
+            <img src="images/lpr-change-ip-2.png" alt="LPR change IP"><br><br>
+            
+          </p>          
+
+          <h3 id="modify_description">Modify the Printer Description and or the IP address.</h3>
+          <p>
+          Steps for *LAN printer.<br>
+          With the writer stopped and the *LAN device VARIED OFF, Open Work with Device Descriptions with the command WRKDEVD *PRT.<br>
+          Place a 2 in the Opt column next to the device to change.<br><br>
+          <img src="images/green-screen-change-1.png" alt="Green Screen endwtr lan ended"><br><br>
+          With the writer stopped and the *LAN device VARIED OFF, Open Work with Device Descriptions with the command WRKDEVD *PRT.<br>
+          Use the page down key to the next page that shows the manufacturer type and model (MFRTYPMDL). In this case it is set for a Lexmark printer with *LEXOPTRA designated.<br>
+          There other type designations that can be used that equate to a "Driver" when compared to other operating systems. For example, an HP printer may require a *HP4 or *HP5SI designation to operate correctly.<br>
+          IBM publishes a list of devices and how they may be best set up and whether they are supported as a LPR or *LAN device as well as the MFRTYPMDL that is recommended.<br>
+          <a href="https://www.ibm.com/support/pages/information-printers-various-manufacturers" target="_blank">IBM Information on Printers from Various Manufacturers</a><br><br>
+          <img src="images/green-screen-change-2.png" alt="Green Screen change MFRTYPMDL"><br><br>
+          Page down again and you can make changes to the IP address. **You can only change the IP for a *LAN device in the description. LPR printers IP addresses are modified in WRKOUTQ.**<br><br>
+          <img src="images/green-screen-change-3.png" alt="Green Screen change IP "><br><br>
+          Page down once more and you can modify the description reflecting the make, model, location, type and IP address. When the changes have been made, hit the enter key to save.<br><br>
+          <img src="images/green-screen-change-4.png" alt="Green Screen change description"><br><br>
+          Use F5 to refresh the list. You may now reverse the order of operations and VARY ON the device and starting the writer as the last task.<br><br>
+          The command is different for the two types of network connected printers<br>
+          *LAN use the STRPRTWTR (DIS ID) command. For example STR<b>PRT</b>WTR E1<br>
+          LPR, STRRMTWTR (DIS ID) would look like STR<b>RMT</b>WTR E3 since it is a LPR device.<br><br>
+          <img src="images/green-screen-change-5.png" alt="Green Screen change refresh"><br><br>
+          Steps for LPR printer.<br>
+          LPR devices do not require the Writer is stopped nor is there anything to VARY OFF before changing the description. However, you will have to stop the writer before you can change the IP address.<br>
+          Type ENDWTR (DIS ID) on a command line to stop a running writer. Place a 2 next to the LPR description you wish to change.<br><br>
+          <img src="images/lpr-change-description-2.png" alt="Change LPR description"><br><br>
+          Page down all the way to the bottom,click on the description line and edit. Be sure to have a single quote at the beginning and the end of the description. You can also remove <b>BOTH</b> quotes and they will be added automatically when the document is saved. Hit the ENTER key to save changes.<br><br>
+          <img src="images/lpr-change-description-1.png" alt="Change LPR description"><br><br>
+
+          </p>
+        <h3 id="troubleshoot">Troubleshooting</h3>
+          <p>
+            <h3 id="lan-trouble">*LAN Troubleshooting</h3>
+
+            <h3>Removal of a *LAN printer</h3>
+
+            A common error when removing a *LAN device. "Device not deleted. Device in use." This is caused by the device still VARIED ON or the WRITER is still running. Use the ENDWTR command to stop and then enter an 8 first and then a 2 to VARY OFF. Attempt the operation again.<br><br>
+            <img src="images/lan-remove-1.png" alt="Remove LAN device"><br><br>
+            
+          </p>
+          <p>
+            <h3 id="lpr-trouble">LPR Troubleshooting</h3>
+            When installing LPR devices an error can occur like the one below. This one is is caused by the DIS ID used already existing as a device. Enter a C on the command line to Cancel the operation.<br><br>
+            <img src="images/create-lpr-error-1.png" alt="Remove LPR device"><br><br>
+            
+
+            <h3>Removal of LPR printer</h3>
+
+          </p>
+          <p>
+            <h3 id="kps-trouble">KPS/Keystone Troubleshooting</h3>
+            KPS printing has several moving parts that all have to be configured and operating properly to work. If there is a print stoppage try verifying the following.<br>
+            1) Type the command WRKOUTQ at a command line and verify that the device has the writer running in the Writer column. If it does not, that would indicate that the Keystone session supporting the connection on the host PC is not running.<br> 
+            2) The Universal Print Driver is no longer selected in the printers<a href="#advanced"> advanced</a> tab. Select the printer and go to properties to verify that the driver is selected in the list.<br>
+            3) The TN5250 emaulator is disconnected. Right click on the printer icon in the system tray and restore to the Desktop. Verify the button at the bottom says disconnect, if not click on connect and the screen will switch to gray indicating that it is enabled.<br>
+          </p>
+          <p>
+            <h3 id="message-wait">Printer Messages (MSGW)</h3>
+            Messages are generated due to form changes, printing an invoice and following up with a check for example. They are also generated when a *LAN device is first created and sent it's very first print job. The can also happen when a printer is no longer available at the network address that is configured
+            on the business system.<br><br>
+            Check printing is designed to produce a MSGW due to the likleyhood that check stock would have to loaded into the printer before printing. A MSGW pauses the job to provide an opportunity to do this. **NOTE that a LPR check printer will <b>NOT</b> produce a MSGW and the stock will have to loaded in advance.<br><br>
+            This message is from a form change. Normally the correct option is "G" which will continue to print the current form until it changes again at which time "G" should be used again and so on.<br>
+            The only exception would be for printing STATEMENTS. In this case to correct option would be "I". After the STATEMENTS finish printing the system will continue to print out the previous form type avoiding another MSGW to answer.<br><br>
+
+            <img src="images/new-lan-msgw.png" alt="Green Screen change refresh"><br><br>
+            This MSGW is indicating that the printer is not in communication. This can be caused by the printer's IP address changing or stops responding and requires power cycling the device to resolve.<br><br>
+            <img src="images/new-lan-msgw-ip.png" alt="Green Screen change refresh"><br><br>
+          </p>
+</div>
+
+</body>
+</html>
