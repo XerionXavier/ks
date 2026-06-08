@@ -42,6 +42,7 @@
 <body>
 <div class="sidebar">
   <a href="#intro">Introduction</a><br>
+  <a href="#start">Quick Start</a><br>
     <a href="#installing">Installing</a>
     <ul style="list-style: none;">
         <li><a href="#installing_lan">*LAN devices</a></li>
@@ -69,6 +70,8 @@
         <li><a href="#kps-trouble">KPS Troubleshooting</a></li>
         <li><a href="#message-wait">Printer messages MSGW</a></li>
     </ul>
+    <a href="#report">Report Center</a><br>
+    <a href="#printer-config">Printer Configuration</a><br>
 </div>
 
 <div class="main-content">
@@ -99,9 +102,13 @@
         <h3 id="installing">Installing a printer device</h3>
           <p>
             There are generally three methods for installing a printer.<br>
-            *LAN - Networked device using HP Jet Direct protocol port 9100. Provides bi-directional communication to the business system for device errors<br>
-            LPR - Networked device using LPD (LPR) protcol port 515<br>
-            KPS - USB connected printer using a Keystone session to connect to business system<br>  
+            *LAN - Networked device using HP Jet Direct protocol port 9100. Provides bi-directional communication to the business system for device errors.<br>
+            LPR - Networked device using LPD (LPR) protcol port 515.<br>
+            KPS - USB connected printer using a Keystone session to connect to business system.<br>  
+          </p>
+          <p>
+            <h3 id="start">Quick Start</h3>
+            
           </p>
           <p>
             <h3 id="installing_lan">*LAN Installation</h3>
@@ -330,6 +337,13 @@
 
           </p>
         <h3 id="troubleshoot">Troubleshooting</h3>
+        <p>
+          <h3>Sudden Print Stoppage</h3>
+          When printing stops suddenly it is normally one of two things.<br>
+          1) A MSGW has occured due to a form change.<br>
+          2) The IP address of the device has somehow changed either by a power spike/sag or firewall reboot if the printer has a dynamically assigned IP address.<br>
+        
+        </p>
           <p>
             <h3 id="lan-trouble">*LAN Troubleshooting</h3>
 
@@ -367,7 +381,37 @@
             This MSGW is indicating that the printer is not in communication. This can be caused by the printer's IP address changing or stops responding and requires power cycling the device to resolve.<br><br>
             <img src="images/new-lan-msgw-ip.png" alt="Green Screen change refresh"><br><br>
           </p>
-</div>
+          <p>
+            <h3 id="report">Report Center</h3>
+            Quantum Report Center provides access to the DIS printing output queues. It can be helpful to view printed documents electronically using a PDF viewer and can serve as a work-around if the printer is temporarily out of communication with the business system such as an IP address change for example.<br>
 
+            
+          </p>          
+          <p>
+            <h3 id="printer-config">Printer Configuration</h3>
+            The instructions are designed to be a guide to printer configuration and some screens can be slightly different than what is depicted. The concepts are the same none the less.<br>
+          </p>
+          <p>
+            <h3>Lexmark</h3>
+            The easiest method for making configuration changes are through the web interface of a network connected printer. Lexmark by default will display the IP address of the printer on your local network.<br>
+            Put this IP address into the address bar of a web Browser. You can encounter a warning page when the page is first loading indicating the website is a risk. This isn't the case, any device being accessed<br>
+            by IP address will generate this error.** BE AWARE THAT THE PRINTER IP CAN LOOK DIFFERENT THAN THE IP IN THE DIS NETWORK CONFIGURATION **. This is due to a 1:1 NAT or network address translation. What we are concerned with 
+            is the last set of numbers or octet, for example xxx.xxx.xxx.100. It is this last set that will be the same on the business system and on your local network.<br><br>
+            A Lexmark printer web interface at the home screen. Click on the Network/Ports menu link on the left margin.<br><br> 
+            <img src="images/lexmark/lex-network-1.png" alt="Lexmark configuration"><br><br>
+            Scroll the page down a little and look for the Ethernet menu item in the center of the screen.<br><br>
+            <img src="images/lexmark/lex-network-2.png" alt="Lexmark configuration"><br><br>
+            Ethernet will expand showing a link in blue text to "Set Static IP Address", click on that.<br><br>
+            <img src="images/lexmark/lex-network-3.png" alt="Lexmark configuration"><br><br>
+            This is where you can set the printers IP address statically so that it can be retained. Look at the printers description in WRKDEVD *PRT to get the last octet of the IP. Click Save to set the new static IP. You should now be able to access the printers web interface at the new IP as well. This serves as a good test that the process was done correctly.<br><br>
+            <img src="images/lexmark/lex-network-4.png" alt="Lexmark configuration"><br><br>
+          </p>
+          <p>
+            <h3>HP</h3>
+            HP printers do not by default display their IP address. To get this information it will be necessary to print a configuration report.<br>
+
+          </p>
+
+</div>  
 </body>
 </html>
