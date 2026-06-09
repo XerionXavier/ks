@@ -324,6 +324,7 @@
           Page down once more and you can modify the description reflecting the make, model, location, type and IP address. When the changes have been made, hit the enter key to save.<br><br>
           <img src="images/green-screen-change-4.png" alt="Green Screen change description"><br><br>
           Use F5 to refresh the list. You may now reverse the order of operations and VARY ON the device and starting the writer as the last task.<br><br>
+          <h3 id="start-writer">Starting the print Writer.</h3> 
           The command is different for the two types of network connected printers<br>
           *LAN use the STRPRTWTR (DIS ID) command. For example STR<b>PRT</b>WTR E1<br>
           LPR, STRRMTWTR (DIS ID) would look like STR<b>RMT</b>WTR E3 since it is a LPR device.<br><br>
@@ -339,10 +340,10 @@
         <h3 id="troubleshoot">Troubleshooting</h3>
         <p>
           <h3>Sudden Print Stoppage</h3>
-          When printing stops suddenly it is normally one of two things.<br>
-          1) A MSGW has occured due to a form change.<br>
-          2) The IP address of the device has somehow changed either by a power spike/sag or firewall reboot if the printer has a dynamically assigned IP address.<br>
-        
+          When printing stops suddenly it is normally one of three things.<br>
+          1) A <a href="#message-wait" >MSGW</a> has occured due to a form change.<br>
+          2) The IP address of the device has somehow changed either by a power spike/sag or firewall reboot if the printer has a dynamically assigned IP address. <a href="#modify_ip">Modify IP</a><br>
+          3) A printers Writer process has stopped/closed. Check the WRKOUTQ and <a href="#start-writer"> start the Writer</a><br>
         </p>
           <p>
             <h3 id="lan-trouble">*LAN Troubleshooting</h3>
@@ -380,12 +381,17 @@
             <img src="images/new-lan-msgw.png" alt="Green Screen change refresh"><br><br>
             This MSGW is indicating that the printer is not in communication. This can be caused by the printer's IP address changing or stops responding and requires power cycling the device to resolve.<br><br>
             <img src="images/new-lan-msgw-ip.png" alt="Green Screen change refresh"><br><br>
+            
           </p>
           <p>
             <h3 id="report">Report Center</h3>
-            Quantum Report Center provides access to the DIS printing output queues. It can be helpful to view printed documents electronically using a PDF viewer and can serve as a work-around if the printer is temporarily out of communication with the business system such as an IP address change for example.<br>
-
-            
+            Quantum Report Center provides access to the DIS printing output queues. It can be helpful to view printed documents electronically using a PDF viewer and can serve as a work-around if the printer is temporarily out of communication with the business system such as an IP address change for example.<br><br>
+            From the home screen, click on System and then Quantum Report Center<br><br>
+            <img src="images/report-center-1.png" alt="Quantum Report Center"><br><br>
+            A new tab will open taking you to the interface by default showing only the jobs of the user in the session and all output queues. Take note of the row of tabs at the top. These are used to filter by user, output queue form type etc..<br><br>
+            <img src="images/report-center-2.png" alt="Quantum Report Center"><br><br>
+            By changing the user from *CUR to *ALL and leaving the rest of the filters in place and clicking Apply, the interface will display all of the print spools on the system. Depending on the number of print spools on the system it can take several seconds to minutes to render. You may want to avoid using this filter if the interface hangs or becomes unresponsive. It is a good idea to make sure that none of the outpout queues contain an excessive number of files. Virtual printer queues such as ZZ, NP or NO PRINT should have no more that 2,000-3,000 spools. Type the command WRKOUTQ at a prompt to see the numbers.<br>
+            <img src="images/report-center-3.png" alt="Quantum Report Center"><br><br>
           </p>          
           <p>
             <h3 id="printer-config">Printer Configuration</h3>
@@ -409,7 +415,14 @@
           <p>
             <h3>HP</h3>
             HP printers do not by default display their IP address. To get this information it will be necessary to print a configuration report.<br>
-
+            At the printers panel, press the settings button, it may look like a gear or a wrench icon. When in this menu use the arrow buttons to advance through until you see the "Reports" menu and press the "OK" button. Use the arrow buttons again to advance to the "Network Configuration" or "System Summary" report. Click OK to select and print.<br>
+            Look for the IPv4 IP address. It should start with "10." or "192.168" in most cases. If you see an IP address starting with "169", this is a self assigned IP and happens when the printer can not get a dynamically assigned IP from the firewall. This is normally caused by a conectivity issue such as a faulty cable.<br>
+          </p>
+          <p>
+            <h3>Xerox</h3>
+            Xerox printers do not by default display their IP address. To get this information it will be necessary to print a configuration report.<br>
+            At the printers panel, press the settings button, it may look like a gear or a wrench icon. When in this menu use the arrow buttons to advance through until you see the "Reports" menu and press the "OK" button. Use the arrow buttons again to advance to the "Network Configuration" or "System Summary" report. Click OK to select and print.<br>
+            Look for the IPv4 IP address. It should start with "10." or "192.168" in most cases. If you see an IP address starting with "169", this is a self assigned IP and happens when the printer can not get a dynamically assigned IP from the firewall. This is normally caused by a conectivity issue such as a faulty cable.<br>
           </p>
 
 </div>  
