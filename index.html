@@ -42,7 +42,7 @@
 <body>
 <div class="sidebar">
   <a href="#intro">Introduction</a><br>
-  <a href="#start">Quick Start</a><br>
+  <!--<a href="#start">Quick Start</a><br>-->
     <a href="#installing">Installing</a>
     <ul style="list-style: none;">
         <li><a href="#installing_lan">*LAN devices</a></li>
@@ -69,6 +69,7 @@
         <li><a href="#lpr-trouble">LPR Troubleshooting</a></li>
         <li><a href="#kps-trouble">KPS Troubleshooting</a></li>
         <li><a href="#message-wait">Printer messages MSGW</a></li>
+        <li><a href="#trayassignment">Tray Assignment</a></li>
     </ul>
     <a href="#report">Report Center</a><br>
     <a href="#printer-config">Printer Configuration</a><br>
@@ -104,14 +105,23 @@
             There are generally three methods for installing a printer.<br>
             *LAN - Networked device using HP Jet Direct protocol port 9100. Provides bi-directional communication to the business system for device errors.<br>
             LPR - Networked device using LPD (LPR) protcol port 515.<br>
-            KPS - USB connected printer using a Keystone session to connect to business system.<br>  
+            KPS - USB connected printer using a Keystone session to connect to business system.<br><br>
+            The only devices that will always work as a *LAN are Lexmark printers. Most HP devices will also work with this connection method but not all. The same with Xerox and Kyocera many of them will work as a *LAN device. The only way to know if the model will work as a *LAN is to set it up as one and test printing. If it does not print or the printer beeps, warms up etc.. The next step would be to try it as a LPR printer.<br>
+            Devices like office class copiers made by Sharp, Panasonic and Toshiba are always LPR devices. This would also include most if not all Canon products. Brother printers are frequently incompatible, but setting up and testing is the only war to know for sure.<br><br>
           </p>
-          <p>
+          <!--<p>
             <h3 id="start">Quick Start</h3>
             
-          </p>
+          </p>-->
           <p>
             <h3 id="installing_lan">*LAN Installation</h3>
+            The steps are as follows.<br>
+            1) Determine the make and model of the printer for the description and the LAN IP address. Ping the IP from the business system to verify it is usable.<br>
+            2) Copy an existing printer modifying the DIS ID and the IP address. Include the device make and model, location, IP address and NAT if it applies.<br>
+            3) Vary On the device.<br>
+            4) Start the print Writer.<br>
+            5) Proceed to adding the device to POS and ENVP(Report printing). Skip these if it is a check printer<br><br>
+
             The best practice is to copy an existing printer that matches as closely as possible the new printer make and model. **If there are no *LAN devices to copy please contact DIS support.**<br>
             Select a printer from the list using page up and down and place a 3 in the options field to copy it.<br><br>            
             <img src="images/copy_star_LAN.png" alt="Green Screen copy *LAN device"><br><br>
@@ -142,8 +152,12 @@
           </p>
           <p>
             <h3 id="installing_lpr">LPR Installation</h3>
+            Steps to create a new LPR device.<br>
+            1) Determine the make and model of the printer for the description and the LAN IP address. Ping the IP from the business system to verify it is usable.<br>
+            2) Run the DISCRTLPR command. When completed the Writer should auto start and there is nothing to Vary On.<br>
+            3) Proceed to adding the device to POS and ENVP(Report printing). Skip these if it is a check printer.<br><br>
             Start by opening a "Green Screen" or use ALT+A at a Quantum Home screen and type the command WRKDEVD *PRT.<br>
-            This type of device is not copied but a configuration is created with the command, DISCRTLPR at a command line and hit enter.<br>
+            This type of device is not copied but a configuration is created with the command, DISCRTLPR at a command line and hit enter.<br><br>
             <img src="images/create_LPR-1.png" alt="Green Screen create LPR device 1"><br><br>
             Fill in the reuired fields with the new Outque name as well as the IP address and a short description that includes "LPR" and the IP address that the business system uses to connct to the printer.<br>
             Remote Printer Queue (PR1) and Mfg Type and Model(*HP4) are always the values shown in the image.<br><br>
@@ -402,8 +416,12 @@
             <img src="images/new-lan-msgw.png" alt="Green Screen change refresh"><br><br>
             This MSGW is indicating that the printer is not in communication. This can be caused by the printer's IP address changing or stops responding and requires power cycling the device to resolve.<br><br>
             <img src="images/new-lan-msgw-ip.png" alt="Green Screen change refresh"><br><br>
-            
           </p>
+          <h3 id="trayassignment">Tray Assignment</h3>
+          Reports or POS documents are sent to the manual feeder instead of pulling from the desired tray.<br>
+          Laserforms Configuration
+          Printer paper type settings are incorrect. A printer can spontaneously change what kind of paper is configured for the tray. The system is by default looking for "Plain Paper Letter", any other paper type will cause the system to default to a manual feeder or a second tray is so equipped. Verify that the Tray 1 and MP feeder are set as shown below.<br><br>
+          <img src="images/lex-paper-type-1.png" alt="Lexmark paper typ configuration screen"><br><br>
           <p>
             <h3 id="report">Report Center</h3>
             Quantum Report Center provides access to the DIS printing output queues. It can be helpful to view printed documents electronically using a PDF viewer and can serve as a work-around if the printer is temporarily out of communication with the business system such as an IP address change for example.<br><br>
