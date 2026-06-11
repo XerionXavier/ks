@@ -182,9 +182,7 @@
           <img src="images/tn5250-1.png" alt="Printers & Scanners properties"><br><br>
           Drag the small dot matrix printer icon out of the hidden tray to the taskbar. This makes it easier to see if it is on and running and if connected.<br><br>
           <img src="images/tn5250-1a.png" alt="Printers & Scanners properties"><br><br>
-          
-          
-          
+
           Right click on the small printer icon then left click on TN5250.<br><br>
           <img src="images/tn5250-2.png" alt="Printers & Scanners properties"><br><br>
           The printer configuration window will open. Click on the DISCONNECT button to permit modification.<br><br>
@@ -199,6 +197,13 @@
         </p>
 
         <h3 id="removing_star_lan">Removing a *LAN printer device</h3>
+        <p>
+          The process is composed of a few steps.<br>
+          1) Verify that the OUTQ has been cleared of any spools. Report Center can be useful to view the spools in the queue and remove or move them to another printer OUTQ.<br>
+          2) Stop the running Writer.<br>
+          3) Vary Off the device.<br>
+          4) Remove the device from Work with Device Descriptions.<br><br>
+        </p>
           <p>
             Writers must be stopped and *LAN devices will also need the device VARIED OFF before it can be completely removed. The output queue will also have to be empty for any device, *LAN, LPR and KPS before removal. Type WRKOUTQ at a command line and page down to the printer you want to remove.<br><br>
             Type ENDWTR on the command line to start a dialog where you can enter the DIS ID of the writer you want to stop. This screen is helpful if you have more than one writer you wish to stop.<br><br>
@@ -226,7 +231,7 @@
           <h3 id="removing_lpr">Removing a LPR printer device</h3>
           <p>
             Writers must be stopped before it can be completely removed.<br>
-            Type the command ENDWTR (DIS ID), for example ENDWTR E3. Type the command WRKOUTQ. Verify that the writer is stopped and that the outq is empty.<br><br>
+            Type the command ENDWTR (DIS ID), for example ENDWTR E3. Type the command WRKOUTQ. Verify that the writer is stopped and that the OUTQ is empty.<br><br>
             <img src="images/remove-lpr-1.png" alt="Remove LPR dev"><br><br>
             Return to the Work with Device Descriptions screen and page down to the device you want to remove. Place a 4 in the Opt column next to the device you wan to remove.<br><br>
             <img src="images/remove-lpr-2.png" alt="Remove LPR dev"><br><br>
@@ -352,21 +357,32 @@
         </p>
           <p>
             <h3 id="lan-trouble">*LAN Troubleshooting</h3>
+            <h3>Writers stopping after one or two prints</h3>
+            A *LAN device in a state reporting a low toner cartridge, imaging component replacement etc.. can cause the business system to close the writer. A work around for this is to remove the device as a *LAN and set up as a LPR device. LPR printers to not report the status of the printer back to the system as a *LAN would.<br><br>
 
             <h3>Removal of a *LAN printer</h3>
 
             A common error when removing a *LAN device. "Device not deleted. Device in use." This is caused by the device still VARIED ON or the WRITER is still running. Use the ENDWTR command to stop and then enter an 8 first and then a 2 to VARY OFF. Attempt the operation again.<br><br>
             <img src="images/lan-remove-1.png" alt="Remove LAN device"><br><br>
-            
+            Errors recreating a *LAN device or removing a LPR to create a *LAN can be caused by spools left behind in the OUTQ. The <a href="#wrkobj">WRKOBJ</a> commad can be used to clean up what remains.<br> 
           </p>
           <p>
             <h3 id="lpr-trouble">LPR Troubleshooting</h3>
-            When installing LPR devices an error can occur like the one below. This one is is caused by the DIS ID used already existing as a device. Enter a C on the command line to Cancel the operation.<br><br>
+            When installing LPR devices an error can occur like the one below. This one is is caused by the DIS ID used already existing as a device. Enter a C on the command line to Cancel the operation. Check that the spools have been removed from the OUTQ and that Writers have been stopped.<br><br>
             <img src="images/create-lpr-error-1.png" alt="Remove LPR device"><br><br>
             
 
             <h3>Removal of LPR printer</h3>
-
+            <p>
+            Most of the issues surrounding removing a LPR device are that the OUTQ still has spools in it when deleted. Using the command WRKOBJ(Work Object) DISID after the OUTQ is clear, allows for the current OUTQ to be removed.<br><br>
+            <img id="wrkobj" src="images/wrkobj-1.png" alt="WRKOBJ delete"><br><br>
+            Place a 4 in the two option fileds to remove the OUTQ and Library for the device ID.<br><br>
+            <img src="images/wrkobj-2.png" alt="WRKOBJ delete"><br><br>  
+            Hit the Enter key to confirm deletion.<br><br>
+            <img src="images/wrkobj-3.png" alt="WRKOBJ delete"><br><br> 
+            Message at the bottom of the screen confirming the OUTQ was deleted.<br><br>
+            <img src="images/wrkobj-4.png" alt="WRKOBJ delete"><br><br> 
+            </p>
           </p>
           <p>
             <h3 id="kps-trouble">KPS/Keystone Troubleshooting</h3>
