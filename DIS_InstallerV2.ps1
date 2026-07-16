@@ -84,7 +84,7 @@ function GenerateForm {
     $ContentList[7] = "Altura Shortcut"
 
     function QuantumShortcut {
-        Add-Type -AssemblyName System.Windows.Forms
+                Add-Type -AssemblyName System.Windows.Forms
         Add-Type -AssemblyName System.Drawing
 
         # 1. Create the form
@@ -125,22 +125,18 @@ function GenerateForm {
 
         # 7. Access the input after the form is closed
         $userInput = $textBox.Text
-        $WshShell = New-Object -ComObject WScript.Shell
-        $ShortcutPath = "$([Environment]::GetFolderPath('Desktop'))\Quantum.lnk"
-        $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
-        $Shortcut.TargetPath = "https://$userInput.dis.us/webclient"
-        $Shortcut.Save()
-        Write-Host "Quantum Desktop shortcut created" -ForegroundColor Green
         $URI = "https://github.com/XerionXavier/ks/blob/main/quantum.ico?raw=true"
         $Path= "C:\DIS\quantum.ico"
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
+        $WshShell = New-Object -ComObject WScript.Shell
         $ShortcutPath = "$([Environment]::GetFolderPath('Desktop'))\Quantum.lnk"
-                $IconPath = "C:\DIS\quantum.ico"
-        $WScriptShell = New-Object -ComObject WScript.Shell
-        $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
+        $IconPath = "C:\DIS\quantum.ico"
+        $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
         $Shortcut.IconLocation = $IconPath
+        $Shortcut.TargetPath = "https://$userInput.dis.us/webclient"
         $Shortcut.Save()
+        Write-Host "Quantum $userInput Desktop shortcut created" -ForegroundColor Green     
     }
 
         function AlturaShortcut {
