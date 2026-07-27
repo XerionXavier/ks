@@ -118,7 +118,7 @@
           <p>
             <h3 id="installing_lan">*LAN Installation</h3>
             The steps are as follows.<br>
-            1) Determine the make and model of the printer for the description and the LAN IP address. Ping the IP from the business system to verify it is usable.<br>
+            1) Determine the make and model of the printer for the description and the LAN IP address. <a href="#ping">Ping</a> test the IP from the business system to verify it is usable.<br>
             2) Copy an existing printer modifying the DIS ID and the IP address. Include the device make and model, location, IP address and NAT if it applies.<br>
             3) Vary On the device.<br>
             4) Start the print Writer.<br>
@@ -155,7 +155,7 @@
           <p>
             <h3 id="installing_lpr">LPR Installation</h3>
             Steps to create a new LPR device.<br>
-            1) Determine the make and model of the printer for the description and the LAN IP address. Ping the IP from the business system to verify it is usable.<br>
+            1) Determine the make and model of the printer for the description and the LAN IP address. <a href="#ping">Ping</a> test the IP from the business system to verify it is usable.<br>
             2) Run the DISCRTLPR command. When completed the Writer should auto start and there is nothing to Vary On.<br>
             3) Proceed to adding the device to POS and ENVP(Report printing). Skip these if it is a check printer.<br><br>
             Start by opening a "Green Screen" or use ALT+A at a Quantum Home screen and type the command WRKDEVD *PRT.<br>
@@ -388,11 +388,19 @@
           <h3>Sudden Print Stoppage</h3>
           When printing stops suddenly it is normally one of three things.<br>
           1) A <a href="#message-wait" >MSGW</a> has occured due to a form change.<br>
-          2) The IP address of the device has somehow changed either by a power spike/sag or firewall reboot if the printer has a dynamically assigned IP address. <a href="#modify_ip">Modify IP</a><br>
+          2) The IP address of the device has changed either by a power spike/sag or firewall reboot if the printer has a dynamically assigned IP address. Verify it is correct with a <a href="#ping">ping</a> test. Change the IP address.<a href="#modify_ip">Modify IP</a><br>
           3) A printers Writer process has stopped/closed. Check the WRKOUTQ and <a href="#start-writer"> start the Writer</a><br>
         </p>
           <p>
             <h3 id="lan-trouble">*LAN Troubleshooting</h3>
+            <h3 id="ping"> <a href="#ping">Ping</a> test the IP of the printer</h3>
+            <p>
+              Type the command WRKDEVD *PRT to get the IP address from the description.<br>
+              At a command line type ping 'the device IP address' and hit Enter. The IP must be between single quotations.<br><br>
+              <img src="images/ping-1.png" alt="ping test"><br><br>
+              The message returned when the device is not reachable and the ping test fails. No response from host message. In this case the IP of the device must be determined and the business system updated.<br><br>
+              <img src="images/ping-2.png" alt="ping test"><br><br>
+            </p>
             <h3>Writers stopping after one or two prints</h3>
             A *LAN device in a state reporting a low toner cartridge, imaging component replacement etc.. can cause the business system to close the writer. A work around for this is to remove the device as a *LAN and set up as a LPR device. LPR printers to not report the status of the printer back to the system as a *LAN would.<br><br>
 
