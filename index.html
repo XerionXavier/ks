@@ -172,6 +172,7 @@
           </p>
           <p>
             <h3 id="installing_kps">Installing KPS printer</h3>
+            ** Before installation of a KPS printer verify that a previous configuration does not exist on another host. Follow the procedure in removing a <a href="#removing_kps">KPS</a> device before configuration of a new host.<br><br>
             Keystone files are modified to enable/disable a USB connected printer. This also requires the Universal print driver is installed for the manufacturer for example Lexmark or HP.<br>
             Lexmark UPD <a href="https://downloads.lexmark.com/downloads/drivers//Lexmark_Universal_v2_UD1_PCL5_Emul_03072025.exe" target="_blank">download</a> link. The correct version is the PCL5 not the PCL XL driver.<br>
             HP UPD driver page. Be sure to select the driver for Windows 64 bit PCL6 <a href="https://support.hp.com/us-en/drivers/hp-universal-print-driver-series-for-windows/503548" target="_blank">download</a> link.<br>
@@ -250,7 +251,7 @@
             Writers must be stopped before it can be completely removed.<br>
             Type the command ENDWTR (DIS ID), for example ENDWTR E3. Type the command WRKOUTQ. Verify that the writer is stopped and that the OUTQ is empty.<br><br>
             <img src="images/remove-lpr-1.png" alt="Remove LPR dev"><br><br>
-            Return to the Work with Device Descriptions screen and page down to the device you want to remove. Place a 4 in the Opt column next to the device you wan to remove.<br><br>
+            Return to the Work with Device Descriptions screen and page down to the device you want to remove. Place a 4 in the Opt column next to the device you want to remove.<br><br>
             <img src="images/remove-lpr-2.png" alt="Remove LPR dev"><br><br>
             Hit the Enter key to confirm the removal of the device.<br><br>
             <img src="images/remove-lpr-3.png" alt="Remove LPR dev"><br><br>
@@ -259,7 +260,8 @@
           </p>
           <p>
         <h3 id="removing_kps">Removing a KPS printer device</h3>
-            A Keystone printer must have the configuration removed from the host that it is connected to before it can be removed from the business system. Use the steps in <a href="#keystone_config">creating</a> a KPS printer and reverse the process by removing the name of the device and that it is default from the config files.<br>
+            A Keystone printer must have the configuration removed from the host that it is connected to before it can be removed from the business system. Use the steps in <a href="#keystone_config">creating</a> a KPS printer and reverse the process by removing the name of the device and that it is default from the config files.<br><br>
+            It is advisable to close Keystone on the host, or in the case the previous host no longer exists, vary off the KPS device on the system by using option 8 in Work with Device Descriptions and then delete the device. It will be recreated on the system when configured on the new host. It is best practice that the description is modified to include the printer make and model as well as some indication of the devices location or user name.<br><br>
           </p>
           
           <h3 id="modify_ENVP">Add device to Report printing</h3>
@@ -352,7 +354,8 @@
           <h3 id="start-writer">Starting the print Writer.</h3> 
           The command is different for the two types of network connected printers<br>
           *LAN use the STRPRTWTR (DIS ID) command. For example STR<b>PRT</b>WTR E1<br>
-          LPR, STRRMTWTR (DIS ID) would look like STR<b>RMT</b>WTR E3 since it is a LPR device.<br><br>
+          LPR, STRRMTWTR (DIS ID) would look like STR<b>RMT</b>WTR E3 since it is a LPR device.<br>
+          KPS printers with a stopped writer normally indicate that Keystone is not running on the host PC.<br><br>
           <img src="images/green-screen-change-5.png" alt="Green Screen change refresh"><br><br>
           Steps for LPR printer.<br>
           LPR devices do not require the Writer is stopped nor is there anything to VARY OFF before changing the description. However, you will have to stop the writer before you can change the IP address.<br>
@@ -419,13 +422,13 @@
 
             <h3>Removal of LPR printer</h3>
             <p>
-            Most of the issues surrounding removing a LPR device are that the OUTQ still has spools in it when deleted. Using the command WRKOBJ(Work Object) DISID after the OUTQ is clear, allows for the current OUTQ to be removed.<br><br>
+            Most of the issues surrounding removing a LPR device are that the OUTQ still has spools in it when deleted and therefore not removed. Using the command WRKOBJ(Work Object) DISID after the OUTQ is clear, allows for the current OUTQ to be removed.<br><br>
             <img id="wrkobj" src="images/wrkobj-1.png" alt="WRKOBJ delete"><br><br>
             Place a 4 in the two option fileds to remove the OUTQ and Library for the device ID.<br><br>
             <img src="images/wrkobj-2.png" alt="WRKOBJ delete"><br><br>  
             Hit the Enter key to confirm deletion.<br><br>
             <img src="images/wrkobj-3.png" alt="WRKOBJ delete"><br><br> 
-            Message at the bottom of the screen confirming the OUTQ was deleted.<br><br>
+            Message at the bottom of the screen confirming the OUTQ was deleted. You should now be able to create the LPR device and the OUTQ will be created with it.<br><br>
             <img src="images/wrkobj-4.png" alt="WRKOBJ delete"><br><br> 
             </p>
           </p>
@@ -434,7 +437,8 @@
             KPS printing has several moving parts that all have to be configured and operating properly to work. If there is a print stoppage try verifying the following.<br>
             1) Type the command WRKOUTQ at a command line and verify that the device has the writer running in the Writer column. If it does not, that would indicate that the Keystone session supporting the connection on the host PC is not running.<br> 
             2) The Universal Print Driver is no longer selected in the printers<a href="#advanced"> advanced</a> tab. Open Windows Printer & Scanners and select the printer and go to properties to verify that the driver is selected in the list.<br>
-            3) The TN5250 emaulator is disconnected. Right click on the printer icon in the system tray and restore to the Desktop. Verify the button at the bottom says disconnect, if not click on connect and the screen will switch to gray indicating that it is enabled.<br>
+            3) The TN5250 emaulator is disconnected. Right click on the printer icon in the system tray and restore to the Desktop. Verify the button at the bottom says disconnect, if not click on connect and the screen will switch to gray indicating that it is enabled.<br><br>
+            <b>Invalid Handle</b> Message will occur when the KPS device is varied on and an attempt is made to start a Keystone session from a different host. Close the Keystone session, in WRKDEVD *PRT Work with Device Descrptions, use option 8 and vary off. Start the Keystone session.<br><br>
           </p>
           <p>
             <h3 id="message-wait">Printer Messages (MSGW)</h3>
@@ -449,6 +453,7 @@
             <img src="images/new-lan-msgw-ip.png" alt="Green Screen change refresh"><br><br>
           </p>
           <h3 id="trayassignment">Tray Assignment</h3>
+
           Reports or POS documents are sent to the manual feeder instead of pulling from the desired tray.<br>
           1) Laser forms Configuration settings will override defaults that a user may have in place. The settings are in System --> Laser forms Configuration<br>
           2) Printer paper type settings are incorrect.<br>
@@ -524,6 +529,22 @@
             HP printers do not by default display their IP address. To get this information it will be necessary to print a configuration report.<br>
             At the printers panel, press the settings button, it may look like a gear or a wrench icon. When in this menu use the arrow buttons to advance through until you see the "Reports" menu and press the "OK" button. Use the arrow buttons again to advance to the "Network Configuration" or "System Summary" report. Click OK to select and print.<br>
             Look for the IPv4 IP address. It should start with "10." or "192.168" in most cases. If you see an IP address starting with "169", this is a self assigned IP and happens when the printer can not get a dynamically assigned IP from the firewall. This is normally caused by a conectivity issue such as a faulty cable.<br>
+          </p>
+          <p>
+            Input the IP address into the address bar of a Web browser that was found in the network configuration report. If you see a page that the site cannot be trusted or is not private, you can click on the advanced button and the proceed link to get the printers web interface. Click on Network.<br><br>
+            <img src="images/HP/HP_LAN_1.png" alt="HP configuration"><br><br>
+            You will likely see a page requesting a PIN. The number can be found inside the printers toner access door.<br><br>
+            <img src="images/HP/HP_LAN_2.png" alt="HP configuration"><br><br>
+            In the left margin, click on the Wired (802.3) link.<br><br>
+            <img src="images/HP/HP_LAN_3.png" alt="HP configuration"><br><br>
+            Then click on IPv4 Configuration.<br><br>
+            <img src="images/HP/HP_LAN_4.png" alt="HP configuration"><br><br>
+            Click the radio button to select Manual IP.<br><br>
+            <img src="images/HP/HP_LAN_5.png" alt="HP configuration"><br><br>
+            Enter the desired and verified unused <b>static IP address</b> and then the Apply button below.<br><br>
+            <img src="images/HP/HP_LAN_6.png" alt="HP configuration"><br><br>
+            You can then after the IP has a chance to apply, load the printers web interface at the newly assigned IP address. you may have to reboot the printer for the change to take effect.<br><br>
+            <img src="images/HP/HP_LAN_7.png" alt="HP configuration"><br><br>
           </p>
           <p>
             <h3>Xerox</h3>
