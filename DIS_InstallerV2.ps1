@@ -84,7 +84,7 @@ function GenerateForm {
     $ContentList[7] = "Altura Shortcut"
 
     function QuantumShortcut {
-                Add-Type -AssemblyName System.Windows.Forms
+        Add-Type -AssemblyName System.Windows.Forms
         Add-Type -AssemblyName System.Drawing
 
         # 1. Create the form
@@ -130,7 +130,7 @@ function GenerateForm {
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
         $WshShell = New-Object -ComObject WScript.Shell
-        $ShortcutPath = "$([Environment]::GetFolderPath('Desktop'))\Quantum.lnk"
+        $ShortcutPath = "$([Environment]::GetFolderPath('Desktop'))\Quantum $userInput.lnk"
         $IconPath = "C:\DIS\quantum.ico"
         $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
         $Shortcut.IconLocation = $IconPath
@@ -187,6 +187,89 @@ function GenerateForm {
           $Favorite.Save()
           Write-Host "Altura Desktop shortcut created" -ForegroundColor Green
         }
+
+    function clientSession {
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$filePath = "C:\Program Files (x86)\DIS\Keystone\legasuite.ini"
+$searchString = "DeviceName"
+
+# 1. Create the Form (Window)
+$form = New-Object System.Windows.Forms.Form
+$form.Text = "Device Name Configuration"
+$form.Size = New-Object System.Drawing.Size(350,160)
+$form.StartPosition = "CenterScreen"
+$form.FormBorderStyle = "FixedDialog"
+$form.MaximizeBox = $false
+$form.MinimizeBox = $false
+
+# 2. Add a Label
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(20,20)
+$label.Size = New-Object System.Drawing.Size(300,20)
+$label.Text = "Enter the new Device Name:"
+$form.Controls.Add($label)
+
+# 3. Add the TextBox
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(20,45)
+$textBox.Size = New-Object System.Drawing.Size(290,20)
+$form.Controls.Add($textBox)
+
+# 4. Add the OK Button
+$okButton = New-Object System.Windows.Forms.Button
+$okButton.Location = New-Object System.Drawing.Point(135,85)
+$okButton.Size = New-Object System.Drawing.Size(75,25)
+$okButton.Text = "OK"
+$okButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $okButton # Allows pressing 'Enter' to submit
+$form.Controls.Add($okButton)
+
+# 5. Add the Cancel Button
+$cancelButton = New-Object System.Windows.Forms.Button
+$cancelButton.Location = New-Object System.Drawing.Point(215,85)
+$cancelButton.Size = New-Object System.Drawing.Size(75,25)
+$cancelButton.Text = "Cancel"
+$cancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $cancelButton # Allows pressing 'Esc' to exit
+$form.Controls.Add($cancelButton)
+
+# 6. Display the form and capture the result
+$formResult = $form.ShowDialog()
+
+# Exit if user clicked Cancel, closed the window, or left it blank
+if ($formResult -ne [System.Windows.Forms.DialogResult]::OK -or [string]::IsNullOrWhiteSpace($textBox.Text)) {
+    Write-Warning "Operation canceled or no input provided. Script aborted."
+    Exit
+}
+
+# Capture the validated input
+$userInput = $textBox.Text
+$newLineText = "DeviceName=$userInput"
+
+# 7. Backup and process the file
+Copy-Item -Path $filePath -Destination "$filePath.bak" -Force
+
+$fileContent = Get-Content -Path $filePath
+$lineFound = $false
+
+$updatedContent = for ($i = 0; $i -lt $fileContent.Count; $i++) {
+    $line = $fileContent[$i]
+    
+    if ($line -like "$searchString*" -and -not $lineFound) {
+        ";$line"          
+        $newLineText      
+        $lineFound = $true 
+    } else {
+        $line             
+    }
+}
+
+$updatedContent | Set-Content -Path $filePath
+Write-Host "File updated successfully with DeviceName=$userInput!" -ForegroundColor Green
+}    
     function addHostname {
         Add-Type -AssemblyName System.Windows.Forms
         Add-Type -AssemblyName System.Drawing
@@ -341,6 +424,7 @@ function GenerateForm {
         #StartInstall
         #KeystoneDownload
         #InstallSumatra
+        clientSession
         IFSShortcut
         KeymappingFolder
         #IFSShortcut
@@ -377,11 +461,7 @@ function GenerateForm {
             exit
           }     
     function InstallECCS {
-        ## 
-        ## Powershell script to automate ECC Service install. v0.1d
-        ##
         # Create C:\DIS directory
-        
         addHostname
         if (-not (test-path "C:\DIS") ) {
             Write-Host "Creating directory C:\DIS\..." -ForegroundColor Red
@@ -401,11 +481,11 @@ function GenerateForm {
         #
         #Download ECC Service to C:\DIS
         Write-Host "Downloading ECCService to C:\DIS\..." -ForegroundColor Green
-        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41922h.exe"
-        $Path= "C:\DIS\im41922h.exe"
+        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41922i.exe"
+        $Path= "C:\DIS\im41922i.exe"
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
-        C:\DIS\im41922h.exe
+        C:\DIS\im41922i.exe
         SetPower   
         #
         #Set ECCService and ECCCommand as Admin
