@@ -63,6 +63,7 @@
         <li><a href="#modify_ip">Modify IP</a></li>
         <li><a href="#modify_description">Modify the Description</a></li>
         <li><a href="#mfrtypmdl">Modify the MFRTYPMDL</a></li>
+        <li><a href="#micr">MICR Check Printing</a></li>
         <li><a href="#start-writer">Starting Writers</a></li>
     </ul>
     <a href="#troubleshoot">Troubleshooting</a>
@@ -351,6 +352,16 @@
           Page down once more and you can modify the description reflecting the make, model, location, type and IP address. When the changes have been made, hit the enter key to save.<br><br>
           <img src="images/green-screen-change-4.png" alt="Green Screen change description"><br><br>
           Use F5 to refresh the list. You may now reverse the order of operations and VARY ON the device and starting the writer as the last task.<br><br>
+          <h3 id="micr">MICR Check Printing</h3>
+          <p>
+          MICR (Magnetic Ink Character Recognition) uses special magnetic ink or toner and the E-13B font standard along the bottom of a check. Note that a MICR printer must be purchased through DIS sales. All other types of printers are not supported. Check stock without routing and account numbers is required.<br><br>
+          From the home screen, click Security > Laserforms Configuration.<br><br>
+          <img src="images/micr-1.png" alt="MICR printer"><br><br>
+          Click on Check payable to select and click the configure button.<br><br>
+          <img src="images/micr-2.png" alt="MICR printer"><br><br>
+          Verify that the printer is enabled and the DIS device name is present before checking the box for "Print MICR". Click the enter button above to save the settings. You can try printing a check for a character alignment test.<br><br>
+          <img src="images/micr-3.png" alt="MICR printer"><br><br>
+        </p>
           <h3 id="start-writer">Starting the print Writer.</h3> 
           The command is different for the two types of network connected printers<br>
           *LAN use the STRPRTWTR (DIS ID) command. For example STR<b>PRT</b>WTR E1<br>
