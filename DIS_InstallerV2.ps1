@@ -83,6 +83,42 @@ function GenerateForm {
     $ContentList[6] = "Quantum Shortcut"
     $ContentList[7] = "Altura Shortcut"
 
+    function ChromeActive {
+        $targetUrl = "dis.us"
+        $registryPath = "HKLM:\SOFTWARE\Policies\Google\Chrome\TabDiscardingExceptions"
+        if (-not (Test-Path $registryPath)) {
+            New-Item -Path $registryPath -Force | Out-Null
+        }
+        $existingValues = Get-ItemProperty -Path $registryPath -ErrorAction SilentlyContinue
+        $index = 1
+        while ($existingValues.PSObject.Properties.Name -contains $index.ToString()) {
+            $index++
+        }
+        New-ItemProperty -Path $registryPath -Name $index.ToString() -Value $targetUrl -PropertyType String -Force
+        Write-Host "Successfully added '$targetUrl' to Chrome's tab discarding exceptions list at index $index." -ForegroundColor Green
+        Write-Host "Please restart Chrome for the changes to take effect." -ForegroundColor Green
+    }
+    function EdgeActive {
+        $RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Edge\SleepingTabsBlockedForUrls"
+        $SiteUrl = "dis.us"
+
+        # Ensure the registry path exists
+        If (!(Test-Path $RegistryPath)) {
+            New-Item -Path $RegistryPath -Force | Out-Null
+        }
+
+        # Find the next available numeric value name
+        $ExistingEntries = Get-ItemProperty -Path $RegistryPath
+        $NextName = 1
+        while ($ExistingEntries.$NextName) {
+            $NextName++
+        }
+
+        # Add the site to the keep-active (blocked from sleeping) list
+        New-ItemProperty -Path $RegistryPath -Name $NextName -Value $SiteUrl -PropertyType String -Force
+        Write-Host "Successfully added '$SiteUrl' to Edge Sleeping Tab exceptions list at index $index." -ForegroundColor Green
+        Write-Host "Please restart Edge for the changes to take effect." -ForegroundColor Green   
+    }
     function QuantumShortcut {
         Add-Type -AssemblyName System.Windows.Forms
         Add-Type -AssemblyName System.Drawing
@@ -136,7 +172,9 @@ function GenerateForm {
         $Shortcut.IconLocation = $IconPath
         $Shortcut.TargetPath = "https://$userInput.dis.us/webclient"
         $Shortcut.Save()
-        Write-Host "Quantum $userInput Desktop shortcut created" -ForegroundColor Green     
+        Write-Host "Quantum $userInput Desktop shortcut created" -ForegroundColor Green
+        ChromeActive
+        EdgeActive    
     }
 
         function AlturaShortcut {
@@ -428,6 +466,7 @@ Write-Host "File updated successfully with DeviceName=$userInput!" -ForegroundCo
         IFSShortcut
         KeymappingFolder
         #IFSShortcut
+        #ChromeActive
         SetAcl
         SetPower
         #UpdateKeystone
