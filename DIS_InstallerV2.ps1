@@ -494,6 +494,8 @@ Write-Host "File updated successfully with DeviceName=$userInput!" -ForegroundCo
             Invoke-WebRequest -URI $URI -OutFile $Path 
             Start-Process powershell 'C:\DIS\SumatraPDF-install.exe -s --all-users'
             Write-Host "SumatraPDF installed.." -ForegroundColor Green
+            Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\.pdf' -Name '(Default)' -Value 'SumatraPDF.pdf'
+            Write-Host "SumatraPDF set as default in Classes ROOT " -ForegroundColor Green
           }
 
           function ExitScript {
@@ -520,11 +522,11 @@ Write-Host "File updated successfully with DeviceName=$userInput!" -ForegroundCo
         #
         #Download ECC Service to C:\DIS
         Write-Host "Downloading ECCService to C:\DIS\..." -ForegroundColor Green
-        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41922i.exe"
-        $Path= "C:\DIS\im41922i.exe"
+        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41922j.exe"
+        $Path= "C:\DIS\im41922j.exe"
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
-        C:\DIS\im41922i.exe
+        C:\DIS\im41922j.exe
         SetPower   
         #
         #Set ECCService and ECCCommand as Admin
