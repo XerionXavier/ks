@@ -77,7 +77,12 @@
         <li><a href="#trayassignment">Tray Assignment</a></li>
     </ul>
     <a href="#report">Report Center</a><br>
-    <a href="#printer-config">Printer Configuration</a><br>
+    <a href="#printer-config">Printer Configuration</a>
+    <ul style="list-style: none;">
+        <li><a href="#lex">Lexmark</a></li>
+        <li><a href="#hp">HP</a></li>
+        <li><a href="#ricoh">Ricoh</a></li>
+    </ul>
 </div>
 
 <div class="main-content">
@@ -537,7 +542,7 @@
             The instructions are designed to be a guide to printer configuration and some screens can be slightly different than what is depicted. The concepts are the same none the less.<br>
           </p>
           <p>
-            <h3>Lexmark</h3>
+            <h3 id="lex">Lexmark</h3>
             The easiest method for making configuration changes are through the web interface of a network connected printer. Lexmark by default will display the IP address of the printer on your local network.<br>
             Put this IP address into the address bar of a web Browser. You can encounter a warning page when the page is first loading indicating the website is a risk. This isn't the case, any device being accessed<br>
             by IP address will generate this error.** BE AWARE THAT THE PRINTER IP CAN LOOK DIFFERENT THAN THE IP IN THE DIS NETWORK CONFIGURATION **. This is due to a 1:1 NAT or network address translation. What we are concerned with 
@@ -552,7 +557,7 @@
             <img src="images/lexmark/lex-network-4.png" alt="Lexmark configuration"><br><br>
           </p>
           <p>
-            <h3>HP</h3>
+            <h3 id="hp">HP</h3>
             HP printers do not by default display their IP address. To get this information it will be necessary to print a configuration report.<br>
             At the printers panel, press the settings button, it may look like a gear or a wrench icon. When in this menu use the arrow buttons to advance through until you see the "Reports" menu and press the "OK" button. Use the arrow buttons again to advance to the "Network Configuration" or "System Summary" report. Click OK to select and print.<br>
             Look for the IPv4 IP address. It should start with "10." or "192.168" in most cases. If you see an IP address starting with "169", this is a self assigned IP and happens when the printer can not get a dynamically assigned IP from the firewall. This is normally caused by a conectivity issue such as a faulty cable.<br>
@@ -574,7 +579,7 @@
             <img src="images/HP/HP_LAN_7.png" alt="HP configuration"><br><br>
           </p>
           <p>
-            <h3>Ricoh</h3>
+            <h3 id="ricoh">Ricoh</h3>
             Input the IP address into the address bar of a Web browser that was found in the network configuration report. If you see a page that the site cannot be trusted or is not private, you can click on the advanced button and the proceed link to get the printers web interface. Click on Network Settings.<br><br>
             <img src="images/ricoh/Ricoh-1.png" alt="Ricoh configuration"><br><br>
             The default tab is Network Status.<br><br>
