@@ -48,6 +48,7 @@
         <li><a href="#installing_lan">*LAN devices</a></li>
         <li><a href="#installing_lpr">LPR devices</a></li>
         <li><a href="#installing_kps">KPS devices</a></li>
+        <li><a href="#installing_virtual">Virtual Printer</a></li>
     </ul>
     <a href="#removing">Removing</a>
     <ul style="list-style: none;">
@@ -85,7 +86,8 @@
               There are generally 3 different methods for connecting printers to the DIS business system.<br>
               *LAN - This method uses the HP Jet Direct protocol also known as Raw printing and is sent to TCP port 9100 of the printer. It has communication capabilities that will inform the business system of errors, out of paper conditions, jams etc..<br>
               LPR - <b>L</b>ine <b>P</b>rinter <b>R</b>emote, uses the LPD service (port 515) to communicate to the device. This method does not provide any communication to the system about it's status. This method is used where devices do not support the *LAN configuration. Please note that LPD is a legacy technology and not a formal standard. Vendors have implemented slight variations in how devices use the LPD service. This can cause compatability issues from device to device.<br>
-              KPS - The Keystone client is configured to connect a supported USB host connected printer to the business system. This is generally only supported with Lexmark and HP devices.<br><br>
+              KPS - The Keystone client is configured to connect a supported USB host connected printer to the business system. This is generally only supported with Lexmark and HP devices.<br>
+              Virtual Printers - Not designed to connect an OUTQ with a device, but rather a destination for reports and print jobs to be accessed by Repot Center in Keystone or Quantum<br><br>
             </p>
             <p>
               IBM publishes a <a href ="https://www.ibm.com/support/pages/information-printers-various-manufacturers" target="_blank">document</a>  on supported printers and suggested methods for communication. The list of printers is several years behind what is currently in production, but it can be used as a guide to successfully set up a printing device.
@@ -212,7 +214,21 @@
           <img src="images/tn5250-5.png" alt="Printers & Scanners properties"><br><br>
           Verify that the device name and the printer selected from the list is correct and click Connect. The window will minimize back to the system tray and the printer should now be ACTIVE and VARIED ON.<br><br>
           <img src="images/tn5250-6.png" alt="Printers & Scanners properties"><br><br>
-          
+        </p>
+        <p>
+          <h3 id="installing_virtual">Creating Virtual printer</h3>
+          System are configured with at least one Virtual printer. The best practice is to copy one, create a new name and description.<br>
+          Enter Work with Device Descriptions with the command WRKDEVD *PRT. Page down until you see NP, NOPRINT or ZZ. Place a 3 on the Opt line to copy.<br><br>
+          <img src="images/Virtual-1.png" alt="Create Virtual printer"><br><br>
+          Enter an unused DIS ID for the new Virtual device and hit the Enter key twice. You should exit back to the list of printers, F5 will refresh the list.<br><br>
+          <img src="images/Virtual-2.png" alt="Create Virtual printer"><br><br>
+          <img src="images/Virtual-3.png" alt="Create Virtual printer"><br><br>
+          Place a 2 in the Opt field and hit Enter.<br><br>
+          <img src="images/Virtual-4.png" alt="Create Virtual printer"><br><br>
+          Page down until you reach the end and click in the Text 'description' field. Enter the description of the new Virtual printer device and hit the Enter key.<br><br>
+          <img src="images/Virtual-5.png" alt="Create Virtual printer"><br><br>
+          You will have to add the printer to <a href="#modify_ENVP">ENVP</a> and <a href="#modify_POS">POS</a> Invoicing if you wish to use it for Report printing as well as Work orders and Invoices.<br><br>
+          <img src="images/Virtual-6.png" alt="Create Virtual printer"><br><br>
         </p>
 
         <h3 id="removing_star_lan">Removing a *LAN printer device</h3>
