@@ -63,9 +63,10 @@
         <li><a href="#chgs36">Change System36 Name</a></li>
         <li><a href="#modify_ip">Modify IP</a></li>
         <li><a href="#modify_description">Modify the Description</a></li>
-        <li><a href="#mfrtypmdl">Modify the MFRTYPMDL</a></li>
         <li><a href="#micr">MICR Check Printing</a></li>
         <li><a href="#start-writer">Starting Writers</a></li>
+        <li><a href="#mfrtypmdl">Modify the MFRTYPMDL</a></li>
+        <li><a href="#report-printer">Selecting Report Printers</a></li>
     </ul>
     <a href="#troubleshoot">Troubleshooting</a>
     <ul style="list-style: none;">
@@ -395,7 +396,7 @@
           <img src="images/lpr-change-description-2.png" alt="Change LPR description"><br><br>
           Page down all the way to the bottom,click on the description line and edit. Be sure to have a single quote at the beginning and the end of the description. You can also remove <b>BOTH</b> quotes and they will be added automatically when the document is saved. Hit the ENTER key to save changes.<br><br>
           <img src="images/lpr-change-description-1.png" alt="Change LPR description"><br><br>
-        <h3 id="mfrtypmdl">Modify the MFRTYPMDL</h3>
+          <h3 id="mfrtypmdl">Modify the MFRTYPMDL</h3>
           <h3>Modify the MFRTYPMDL *LAN</h3>
           <p>
             There are some situations that will require changing the MFRTYPMDL designation of a printer. The methods differ whether it be a *LAN or LPR device.<br><br>
@@ -419,11 +420,19 @@
           From a command line type CHGOUTQ OUTQ(G3) MFRTYPMDL(*HP4000) and hit Enter. Where the OUTQ is the printer queue in question and the MFRTYPMDL accordingly. The Writer should start automatically when saved.<br><br>
           <img src="images/mfrtypmdl-5.png" alt="MFRTYPMDL"><br><br>
           </p>
+          <p>
+          <h3 id="report-printer">Select Report Printer</h3>
+          To select a printer or output queue for reports, start from the home screen and click System and then click on Work with DIS report Printers.<br><br>
+            <img src="images/Select-Report-Printer-1.png" alt="Report Printers"><br><br>
+            Click on the desired printer from the list to select. Click the button at the top(Select printer or output queue) Use the blue arrows to page up and down through the list if necessary.<br>
+            You can open a session of <a href="#report">Report Center</a> to manage the jobs and view the OUTQ's that contain the documents to be printed.<br><br>
+            <img src="images/Select-Report-Printer-2.png" alt="Report Printers"><br><br>
+          </p>
         <h3 id="troubleshoot">Troubleshooting</h3>
         <p>
           <h3>Sudden Print Stoppage</h3>
           When printing stops suddenly it is normally one of three things.<br>
-          1) A <a href="#message-wait" >MSGW</a> has occured due to a form change.<br>
+          1) A <a href="#message-wait">MSGW</a> has occured due to a form change.<br>
           2) The IP address of the device has changed either by a power spike/sag or firewall reboot if the printer has a dynamically assigned IP address. Verify it is correct with a <a href="#ping">ping</a> test. Change the IP address.<a href="#modify_ip">Modify IP</a><br>
           3) A printers Writer process has stopped/closed. Check the WRKOUTQ and <a href="#start-writer"> start the Writer</a><br>
         </p>
