@@ -102,7 +102,7 @@
             <p>
               For consistency use a Terminal session such as a "Green Screen" or a Quantum session as the interface is almost identical.<br>
               This is the WRKDEVD *PRT view of the printing devices installed on the system.<br>
-              You can open this view by the key combo ALT+A entering the command WRKDEVD *PRT and clicking OK, or opening from the Quantum home screen System -> System Operator Only -> Start/End Printers<br>
+              You can open this view by the key combo ALT+A entering the command WRKDEVD *PRT or WRKOUTQ and clicking OK. You can also open a prompt from the Quantum home screen System -> System Operator Only -> Start/End Printers<br>
             </p>
             <p>
               <img src="images/green-screen-wrkdevd.png" alt="Green Screen WRKDEVD *PRT view">
@@ -202,9 +202,9 @@
           <img src="images/legap-ini.png" alt="Explorer"><br><br>
           Scroll down to the bottom of the file to the "PrinterDevice="" section. Append the name of the DIS ID to that line, then save and close. For example PrinterDevice=E5. If the configuration is to be removed, restore the line to PrinterDevice=<br><br>
           <img src="images/legap-ini-1.png" alt="Edit legap.ini"><br><br>
-          Open the second file legasuite.ini and scroll to the bottom. Type DEFAULT on the line next to "Default Printer=". Save and close the file. For example, DefaultPrinter=DEFAULT. In the event that the configuration os to be removed, change the line back to DefaultPrinter=<br><br>
+          Open the second file legasuite.ini and scroll to the bottom. Type DEFAULT on the line next to "Default Printer=". Save and close the file. For example, DefaultPrinter=DEFAULT. In the event that the configuration is to be removed, change the line back to DefaultPrinter=. Save and close both files.<br><br>
           <img src="images/legap-ini-2.png" alt="edit legasuite.ini"><br><br>
-          Open Keystone from the Desktop shortcut or from the start menu. You should see a small notification window open for a few seconds as below. This is an dication that the host is configured for KPS printing.<br><br>
+          Open Keystone from the Desktop shortcut or from the start menu. You should see a small notification window open for a few seconds as below. This is an indication that the host is configured for KPS printing.<br><br>
           <img src="images/tn5250-splash.png" alt="Printers & Scanners properties"><br><br>
           Expand the system tray by clicking the up arrow in the Taskbar on the far right next to the clock.<br><br>
           <img src="images/tn5250-1.png" alt="Printers & Scanners properties"><br><br>
@@ -215,7 +215,7 @@
           <img src="images/tn5250-2.png" alt="Printers & Scanners properties"><br><br>
           The printer configuration window will open. Click on the DISCONNECT button to permit modification.<br><br>
           <img src="images/tn5250-3.png" alt="Printers & Scanners properties"><br><br>
-          In the Printer Device field, enter the DIS ID of the printer in this case it is E6.<br><br>
+          In the Printer Device field, enter the DIS ID of the printer in this case it is E6. Click on the printer button to select a local Windows printer.<br><br>
           <img src="images/tn5250-4.png" alt="Printers & Scanners properties"><br><br>
           Click the dropdown menu and select the printer with the Univeral Print Driver installed and click OK.<br><br>
           <img src="images/tn5250-5.png" alt="Printers & Scanners properties"><br><br>
