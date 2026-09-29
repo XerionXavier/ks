@@ -449,6 +449,10 @@
             <p>
               Type the command WRKDEVD *PRT to get the IP address from the description.<br>
               At a command line type ping 'the device IP address' and hit Enter. The IP must be between single quotations.<br><br>
+              Common scenarios of IP addressing issues are:<br>
+              1) The device is DHCP and was restarted or the firewall rebooted and the IP address has changed. In this case the business system would have to be updated to the new IP. Best practice would be to assign a static IP to the device.<br>
+              2) A IP duplication would present itself as the ping replies succeed to the IP in the system for the device, but jobs are at a SND status in the OUTQ. Switch off the printer and repeat the ping test, if there is a response there is a duplication.<br><br>  
+
               <img src="images/ping-1.png" alt="ping test"><br><br>
               The message returned when the device is not reachable and the ping test fails. No response from host message. In this case the IP of the device must be determined and the business system updated.<br><br>
               <img src="images/ping-2.png" alt="ping test"><br><br>
