@@ -126,7 +126,7 @@ function GenerateForm {
         # 1. Create the form
         $form = New-Object System.Windows.Forms.Form
         $form.Text = 'Create Quantum Desktop Shortcut'
-        $form.Size = New-Object System.Drawing.Size(300, 160)
+        $form.Size = New-Object System.Drawing.Size(300, 180)
         $form.StartPosition = 'CenterScreen'
         $form.TopMost = $true #
 
@@ -137,11 +137,17 @@ function GenerateForm {
         $label.Text = 'Quantum Hostname(without .dis.us/webclient)'
         $form.Controls.Add($label)
 
-        # 3. Add a text box
+
+        # 3. Add a first text box
         $textBox = New-Object System.Windows.Forms.TextBox
         $textBox.Location = New-Object System.Drawing.Point(10, 40)
         $textBox.Size = New-Object System.Drawing.Size(260, 20)
         $form.Controls.Add($textBox)
+
+        $textBox1 = New-Object System.Windows.Forms.TextBox
+        $textBox1.Location = New-Object System.Drawing.Point(10, 70)
+        $textBox1.Size = New-Object System.Drawing.Size(260, 20)
+        $form.Controls.Add($textBox1)
 
         # 4. Add an OK button
         $okButton = New-Object System.Windows.Forms.Button
@@ -161,6 +167,7 @@ function GenerateForm {
 
         # 7. Access the input after the form is closed
         $userInput = $textBox.Text
+        $userInput1 = $textBox1.Text
         $URI = "https://github.com/XerionXavier/ks/blob/main/quantum.ico?raw=true"
         $Path= "C:\DIS\quantum.ico"
         $ProgressPreference = 'SilentlyContinue'
@@ -170,7 +177,7 @@ function GenerateForm {
         $IconPath = "C:\DIS\quantum.ico"
         $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
         $Shortcut.IconLocation = $IconPath
-        $Shortcut.TargetPath = "https://$userInput.dis.us/webclient"
+        $Shortcut.TargetPath = "https://$userInput.dis.us/webclient/?DeviceName=$userInput1"
         $Shortcut.Save()
         Write-Host "Quantum $userInput Desktop shortcut created" -ForegroundColor Green
         ChromeActive
@@ -522,11 +529,11 @@ Write-Host "File updated successfully with DeviceName=$userInput!" -ForegroundCo
         #
         #Download ECC Service to C:\DIS
         Write-Host "Downloading ECCService to C:\DIS\..." -ForegroundColor Green
-        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41922j.exe"
-        $Path= "C:\DIS\im41922j.exe"
+        $URI = "https://dis-ts-files.s3.us-west-2.amazonaws.com/Public/im/im41922k.exe"
+        $Path= "C:\DIS\im41922k.exe"
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -URI $URI -OutFile $Path
-        C:\DIS\im41922j.exe
+        C:\DIS\im41922k.exe
         SetPower   
         #
         #Set ECCService and ECCCommand as Admin
