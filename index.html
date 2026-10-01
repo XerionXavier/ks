@@ -65,6 +65,7 @@
         <li><a href="#modify_description">Modify the Description</a></li>
         <li><a href="#micr">MICR Check Printing</a></li>
         <li><a href="#start-writer">Starting Writers</a></li>
+        <li><a href="#stop-writer">Ending Writers</a></li>
         <li><a href="#mfrtypmdl">Modify the MFRTYPMDL</a></li>
         <li><a href="#report-printer">Selecting Report Printers</a></li>
         <li><a href="#pos-printer">Selecting POS Printers</a></li>
@@ -77,6 +78,7 @@
         <li><a href="#kps-trouble">KPS Troubleshooting</a></li>
         <li><a href="#message-wait">Printer messages MSGW</a></li>
         <li><a href="#trayassignment">Tray Assignment</a></li>
+        <li><a href="#wrkjob">Work with Jobs</a></li>
     </ul>
     <a href="#report">Report Center</a><br>
     <a href="#printer-config">Printer Configuration</a>
@@ -385,7 +387,8 @@
           Verify that the printer is enabled and the DIS device name is present before checking the box for "Print MICR". Click the enter button above to save the settings. You can try printing a check for a character alignment test.<br><br>
           <img src="images/micr-3.png" alt="MICR printer"><br><br>
         </p>
-          <h3 id="start-writer">Starting the print Writer.</h3> 
+          <h3 id="start-writer">Starting the print Writer.</h3>
+          <p>
           The command is different for the two types of network connected printers<br>
           *LAN connected devices use the STRPRTWTR (DIS ID) command. For example STR<b>PRT</b>WTR E1<br>
           LPR connected devices use the STRRMTWTR (DIS ID) would look like STR<b>RMT</b>WTR E3 since it is a LPR device.<br>
@@ -397,6 +400,12 @@
           <img src="images/lpr-change-description-2.png" alt="Change LPR description"><br><br>
           Page down all the way to the bottom,click on the description line and edit. Be sure to have a single quote at the beginning and the end of the description. You can also remove <b>BOTH</b> quotes and they will be added automatically when the document is saved. Hit the ENTER key to save changes.<br><br>
           <img src="images/lpr-change-description-1.png" alt="Change LPR description"><br><br>
+          </p>
+          <h3 id="stop-writer">Stopping the print Writer.</h3>
+          <p>
+            From a command line, Type ENDWTR and the DIS ID of the device, hit Enter.<br><br>
+          <img src="images/endwtr-1.png" alt="End Print Writer"><br><br>
+          </p>
           <h3 id="mfrtypmdl">Modify the MFRTYPMDL</h3>
           <h3>Modify the MFRTYPMDL *LAN</h3>
           <p>
@@ -468,9 +477,11 @@
           </p>
           <p>
             <h3 id="lpr-trouble">LPR Troubleshooting</h3>
+          <p>
             When installing LPR devices an error can occur like the one below. This one is is caused by the DIS ID used already existing as a device. Enter a C on the command line to Cancel the operation. Check that the spools have been removed from the OUTQ and that Writers have been stopped.<br><br>
             <img src="images/create-lpr-error-1.png" alt="Remove LPR device"><br><br>
-            
+            A print job is stuck at a SND in the OUTQ and pings are OK. The solution is to go to the WRKOUTQ and hold the OUTQ for the device. End the print Writer. Start the print Writer and then release the OUTQ.<br><br>
+          </p>
 
             <h3>Removal of LPR printer</h3>
             <p>
@@ -512,6 +523,10 @@
           3) A printer can spontaneously change what kind of paper is configured for the tray.<br>
           The system is by default looking for "Plain Paper Letter", any other paper type will cause the system to default to a manual feeder or a second tray is so equipped. Verify that the Tray 1 and MP feeder are set as shown below.<br><br>
           <img src="images/lex-paper-type-1.png" alt="Lexmark paper typ configuration screen"><br><br>
+          <p>
+            <h3 id="wrkjob">Work with Job</h3>
+            Printer communication issues can be investigated in depth using Work with Jobs.<br>
+          </p>
           <p>
             <h3 id="report">Report Center</h3>
             Quantum Report Center provides access to the DIS printing output queues. It can be helpful to view printed documents electronically using a PDF viewer and can serve as a work-around if the printer is temporarily out of communication with the business system such as an IP address change for example.<br><br>
