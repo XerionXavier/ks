@@ -196,7 +196,7 @@ function GenerateForm {
         # 1. Create the form
         $form = New-Object System.Windows.Forms.Form
         $form.Text = 'Create Altura Desktop Shortcut'
-        $form.Size = New-Object System.Drawing.Size(300, 150)
+        $form.Size = New-Object System.Drawing.Size(300, 180)
         $form.StartPosition = 'CenterScreen'
         $form.TopMost = $true #
 
@@ -207,7 +207,7 @@ function GenerateForm {
         $label.Text = 'Enter Altura Dealer ID'
         $form.Controls.Add($label)
 
-        # 3. Add a text box
+        # 3. Add a first text box
         $textBox = New-Object System.Windows.Forms.TextBox
         $textBox.Location = New-Object System.Drawing.Point(10, 40)
         $textBox.Size = New-Object System.Drawing.Size(260, 20)
@@ -230,12 +230,19 @@ function GenerateForm {
         [void]$form.ShowDialog()
 
         # 7. Access the input after the form is closed
-          $userInput = $textBox.Text
-          $Shell = New-Object -ComObject ("WScript.Shell")
-          $Favorite = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\DIS Altura.url")
-          $Favorite.TargetPath = "https://$userInput.disprism.com/altura"
-          $Favorite.Save()
-          Write-Host "Altura Desktop shortcut created" -ForegroundColor Green
+        $userInput = $textBox.Text
+        $URI = "https://github.com/XerionXavier/ks/blob/main/Altura.ico?raw=true"
+        $Path= "C:\DIS\Altura.ico"
+        $ProgressPreference = 'SilentlyContinue'
+        Invoke-WebRequest -URI $URI -OutFile $Path
+        $WshShell = New-Object -ComObject WScript.Shell
+        $ShortcutPath = "$([Environment]::GetFolderPath('Desktop'))\Altura $userInput.lnk"
+        $IconPath = "C:\DIS\Altura.ico"
+        $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
+        $Shortcut.IconLocation = $IconPath
+        $Shortcut.TargetPath = "https://$userInput.disprism.com/altura"
+        $Shortcut.Save()
+        Write-Host "Altura $userInput Desktop shortcut created" -ForegroundColor Green
         }
 
     function clientSession {
