@@ -137,21 +137,26 @@ function GenerateForm {
         $label.Text = 'Quantum Hostname(without .dis.us/webclient)'
         $form.Controls.Add($label)
 
-
         # 3. Add a first text box
         $textBox = New-Object System.Windows.Forms.TextBox
         $textBox.Location = New-Object System.Drawing.Point(10, 40)
         $textBox.Size = New-Object System.Drawing.Size(260, 20)
         $form.Controls.Add($textBox)
 
+        $label1 = New-Object System.Windows.Forms.Label
+        $label1.Text = "Friendly Name"
+        $label1.Location = New-Object System.Drawing.Point(10, 63)
+        $label1.Size = New-Object System.Drawing.Size(260, 20)
+        $form.Controls.Add($label1)
+
         $textBox1 = New-Object System.Windows.Forms.TextBox
-        $textBox1.Location = New-Object System.Drawing.Point(10, 70)
+        $textBox1.Location = New-Object System.Drawing.Point(10, 80)
         $textBox1.Size = New-Object System.Drawing.Size(260, 20)
         $form.Controls.Add($textBox1)
 
         # 4. Add an OK button
         $okButton = New-Object System.Windows.Forms.Button
-        $okButton.Location = New-Object System.Drawing.Point(100, 80)
+        $okButton.Location = New-Object System.Drawing.Point(100, 105)
         $okButton.Size = New-Object System.Drawing.Size(75, 25)
         $okButton.Text = 'OK'
         $okButton.Add_Click({
