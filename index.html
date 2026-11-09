@@ -79,6 +79,7 @@
         <li><a href="#message-wait">Printer messages MSGW</a></li>
         <li><a href="#trayassignment">Tray Assignment</a></li>
         <li><a href="#wrkjob">Work with Jobs</a></li>
+        <li><a href="#bulk-delete">Bulk Delete Spools</a></li>
     </ul>
     <a href="#report">Report Center</a><br>
     <a href="#printer-config">Printer Configuration</a>
@@ -529,6 +530,26 @@
           <p>
             <h3 id="wrkjob">Work with Job</h3>
             Printer communication issues can be investigated in depth using Work with Jobs.<br>
+          </p>
+          <p>
+            <h3 id="bulk-delete">Bulk Delete Spools</h3>
+            It is advisable to remove spools from the Virtual printer queues when they have been printed or viewed, however if some are left behind and the number grows to more than 5-6 thousand it may be necessary to remove them with System i Navigator where Quantum Report Center may have difficulty filtering spools when there are tens of thousands.<br>
+            A computer with Keystone installed and the IBM Client access tools is required. If this software is not on your system contact support.<br><br>
+           Open System i Navigator from the start menu.<br><br>
+            <img src="images/bulk-delete-1.png" alt="Open System i Navigator"><br><br>
+            Click on the plus sign to connect to the IBM server.<br><br>
+            <img src="images/bulk-delete-2.png" alt="Open System i Navigator"><br><br>
+            User your Keystone credentials to signon.<br><br>
+            <img src="images/bulk-delete-3.png" alt="Open System i Navigator"><br><br>
+            Click on Work Management and them Output Queues. Select the printer OUTQ you want to manage. The contents of the queue on the right.<br><br>
+            <img src="images/bulk-delete-4.png" alt="Open System i Navigator"><br><br>
+            Depending on the number involved, a basic rule would be to select no more than two months of jobs at a time. This will not load the system for a prolonged period of time as it is filtering and deleting. Sort the list by clicking on the Created column header so that the oldest jobs are on top. Scroll down no more than 60 days and click on a file. Use the key combo of Shift+Page up to select the block.<br><br>
+            <img src="images/bulk-delete-5.png" alt="Open System i Navigator"><br><br>
+            Right click on the selected spools and then Delete.<br><br>
+            <img src="images/bulk-delete-6.png" alt="Open System i Navigator"><br><br>
+            A confimation box will appear. Click Delete. This process can take several seconds to complete.<br><br>
+            <img src="images/bulk-delete-7.png" alt="Open System i Navigator"><br><br>
+            Repeat this process until the number is brought below 3,000 spools left in the OUTQ. This will allow the printing system to function more efficiently.<br><br>
           </p>
           <p>
             <h3 id="report">Report Center</h3>
