@@ -558,19 +558,19 @@
             <img src="images/report-center-1.png" alt="Quantum Report Center"><br><br>
             A new tab will open taking you to the interface by default showing only the jobs of the user in the session and all output queues. Take note of the row of tabs at the top. These are used to filter by user, output queue form type etc..<br><br>
             <img src="images/report-center-2.png" alt="Quantum Report Center"><br><br>
-            By changing the user from *CUR to *ALL and leaving the rest of the filters in place and clicking Apply, the interface will display all of the print spools on the system. Depending on the number of print spools on the system it can take several seconds to minutes to render. You may want to avoid using this filter if the interface hangs or becomes unresponsive. It is a good idea to make sure that none of the outpout queues contain an excessive number of files. Virtual printer queues such as ZZ, NP or NO PRINT should have no more that 2,000-3,000 spools. Type the command WRKOUTQ at a prompt to see the numbers.<br>
+            By changing the user from *CUR to *ALL and leaving the rest of the filters in place and clicking Apply, the interface will display all of the print spools on the system. Depending on the number of print spools on the system it can take several seconds to minutes to render. You may want to avoid using this filter if the interface hangs or becomes unresponsive. It is also a good idea to make sure that none of the output queues contain an excessive number of files. Virtual printer queues such as ZZ, NP or NO PRINT should have no more that 2,000-3,000 spools. Type the command WRKOUTQ at a prompt to see the numbers.<br>
             <img src="images/report-center-3.png" alt="Quantum Report Center"><br><br>
           </p>
           <p>
             <h3>Removing spools from an output queue</h3>
-            If a printer has been out of opration for some time, the outq can collect many spools that you may not want to print. If there are a large number using the green screen can be cumbersome. Report Center makes this a much easier task. In the image below I can filter for only the DISBACKZ reports generated at EOD by changing the user to DISBACKZ maintaining the NP as the outq and apply filters. I can then click the upper mmost checkbox to select all of the spools. When the selection has been made you can click the Delete button to remove. The reports do exist in archiving and retaining them in the outq is not necessary or advised. (Note: depending on the number of spools selected, it can take several seconds or minutes for the process to complete)<br><br>
+            If a printer has been out of operation for some time, the outq can collect many spools that you may not want to print. If there are a large number using the green screen can be cumbersome. Report Center makes this a much easier task. In the image below I can filter for only the DISBACKZ reports generated at EOD by changing the user to DISBACKZ maintaining the NP as the outq and apply filters. I can then click the upper most checkbox to select all of the spools. When the selection has been made you can click the Delete button to remove. The reports do exist in archiving and retaining them in the outq is not necessary or advised. (Note: depending on the number of spools selected, it can take several seconds or minutes for the process to complete)<br><br>
             <img src="images/report-center-4.png" alt="Quantum Report Center"><br><br>
           </p>
           <p>
             <h3>Moving spools to a working printer</h3>
             If a DIS printer is not in operation it is possible to move the spools stuck in one queue to a working printers outq. This method works well if there are a number of spools that need to be printed. Select the job checkboxes and click on the move button.<br><br>
             <img src="images/report-center-5.png" alt="Quantum Report Center"><br><br>
-            Enter the DIS ID of the working printer you want to send the spools to and select the Output Queue. Click OK. The spools should now be printing where they were directed.<br><br>
+            Enter the DIS ID of the working printer you want to send the spools to and select the output Queue. Click OK. The spools should now be printing where they were directed.<br><br>
             <img src="images/report-center-6.png" alt="Quantum Report Center"><br><br>
           </p>         
            <h3>Open a Report Center spool as a PDF</h3>
